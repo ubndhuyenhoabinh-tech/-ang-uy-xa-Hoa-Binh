@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đảng ủy xã Hòa Bình - Mô hình 3 Rõ, 3 Kiểm, 3 Kịp Thời</title>
+    <meta name="description" content="Hệ thống theo dõi nhiệm vụ theo mô hình 3 Rõ - 3 Kiểm - 3 Kịp thời của Đảng ủy xã Hòa Bình.">
+    <meta name="theme-color" content="#b91c1c">
+    <meta name="robots" content="index,follow">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        partyRed: '#b91c1c',
+                        partyGold: '#d97706',
+                        statusGreen: '#16a34a',
+                        statusYellow: '#ca8a04',
+                        statusOrange: '#ea580c',
+                        statusRed: '#dc2626'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- QR Code Generator Lib -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-btn.active {
+            border-bottom: 3px solid #b91c1c;
+            color: #b91c1c;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header / Banner -->
+    <header class="bg-gradient-to-r from-red-900 via-red-800 to-red-950 text-white shadow-lg border-b-4 border-amber-500">
+        <div class="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 bg-amber-400 rounded-full flex items-center justify-center text-red-900 shadow-md font-extrabold text-2xl border-2 border-amber-200">
+                    ★
+                </div>
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-amber-300 font-bold">Đảng Cộng sản Việt Nam - Đảng ủy xã Hòa Bình (Tỉnh Cà Mau)</div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white mt-0.5">
+                        MÔ HÌNH “3 RÕ – 3 KIỂM – 3 KỊP THỜI”
+                    </h1>
+                    <p class="text-xs md:text-sm text-red-100 italic mt-1">
+                        “Việc dân không chờ – Việc Đảng rõ người – Chính quyền rõ trách nhiệm”
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 bg-red-950/60 p-2.5 rounded-lg border border-red-700/50 text-xs text-amber-200">
+                <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
+                <div>
+                    <div class="font-bold">Đề xuất trọng điểm khảo sát:</div>
+                    <div class="text-white">“Ngày thứ Sáu không giấy hẹn – Giải quyết việc dân trong 24h”</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-2 md:gap-6 text-sm font-medium">
+            <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn active py-3.5 px-3 flex items-center gap-2 whitespace-nowrap hover:text-red-700 transition">
+                <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard & Chỉ Tiêu Cam Kết
+            </button>
+            <button onclick="switchTab('tasks')" id="tab-tasks" class="tab-btn py-3.5 px-3 flex items-center gap-2 whitespace-nowrap hover:text-red-700 transition">
+                <i data-lucide="list-todo" class="w-4 h-4"></i> Quản Lý 20 Nhiệm Vụ Trọng Điểm
+            </button>
+            <button onclick="switchTab('friday')" id="tab-friday" class="tab-btn py-3.5 px-3 flex items-center gap-2 whitespace-nowrap hover:text-red-700 transition">
+                <i data-lucide="clock" class="w-4 h-4"></i> Module "Thứ 6 Không Giấy Hẹn"
+            </button>
+            <button onclick="switchTab('audit')" id="tab-audit" class="tab-btn py-3.5 px-3 flex items-center gap-2 whitespace-nowrap hover:text-red-700 transition">
+                <i data-lucide="check-square" class="w-4 h-4"></i> Rà Soát "3 Kiểm" & Cảnh Báo
+            </button>
+            <button onclick="switchTab('survey')" id="tab-survey" class="tab-btn py-3.5 px-3 flex items-center gap-2 whitespace-nowrap hover:text-red-700 transition">
+                <i data-lucide="map-pin" class="w-4 h-4"></i> Khảo Sát 5 Điểm & Hồ Sơ
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
+
+        <!-- ================= TAB 1: DASHBOARD ================= -->
+        <div id="section-dashboard" class="space-y-6">
+            <!-- Summary Banner -->
+            <div class="bg-gradient-to-r from-amber-500/10 via-red-500/10 to-transparent p-4 rounded-xl border border-amber-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <i data-lucide="award" class="w-5 h-5 text-amber-600"></i> Mục Tiêu & Chỉ Tiêu Cam Kết Mô Hình 2026
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">Đổi mới phương thức lãnh đạo, điều hành của Đảng ủy xã Hòa Bình theo chu trình: Giao việc → Rõ người → Rõ hạn → Theo dõi → Kiểm tra → Tháo gỡ → Đánh giá → Nhân rộng.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="loadSampleData()" class="text-xs bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-3 py-2 rounded-lg font-medium flex items-center gap-1.5 transition shadow-sm">
+                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Nạp Dữ Liệu Mẫu (20 NV)
+                    </button>
+                    <button onclick="exportCSV()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-lg font-medium flex items-center gap-1.5 transition shadow-sm">
+                        <i data-lucide="download" class="w-3.5 h-3.5"></i> Xuất Excel/CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPI Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-blue-600">
+                    <div class="text-xs font-semibold text-slate-500 uppercase">Tổng số nhiệm vụ</div>
+                    <div id="kpi-total" class="text-2xl font-extrabold text-slate-800 mt-1">0</div>
+                    <div class="text-[11px] text-slate-500 mt-1">100% Có rõ người chủ trì</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-emerald-600">
+                    <div class="text-xs font-semibold text-emerald-700 uppercase flex items-center justify-between">
+                        Hoàn thành (Xanh) <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    </div>
+                    <div id="kpi-green" class="text-2xl font-extrabold text-emerald-700 mt-1">0</div>
+                    <div id="kpi-green-pct" class="text-[11px] text-emerald-600 font-medium mt-1">Đạt 0% tổng số</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-amber-500">
+                    <div class="text-xs font-semibold text-amber-700 uppercase flex items-center justify-between">
+                        Đang làm (Vàng) <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                    </div>
+                    <div id="kpi-yellow" class="text-2xl font-extrabold text-amber-700 mt-1">0</div>
+                    <div class="text-[11px] text-amber-600 font-medium mt-1">Đúng tiến độ đề ra</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-orange-500">
+                    <div class="text-xs font-semibold text-orange-700 uppercase flex items-center justify-between">
+                        Nguy cơ chậm (Cam) <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+                    </div>
+                    <div id="kpi-orange" class="text-2xl font-extrabold text-orange-700 mt-1">0</div>
+                    <div class="text-[11px] text-orange-600 font-medium mt-1">Cần Thường trực tháo gỡ</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-red-600">
+                    <div class="text-xs font-semibold text-red-700 uppercase flex items-center justify-between">
+                        Quá hạn (Đỏ) <span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>
+                    </div>
+                    <div id="kpi-red" class="text-2xl font-extrabold text-red-700 mt-1">0</div>
+                    <div class="text-[11px] text-red-600 font-medium mt-1">Yêu cầu xác định rõ trách nhiệm</div>
+                </div>
+            </div>
+
+            <!-- Detailed Indicators vs Commitments Table -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left 2 cols: Chỉ tiêu cam kết khảo sát -->
+                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                    <h3 class="font-bold text-slate-800 text-base mb-4 flex items-center gap-2 border-b pb-2">
+                        <i data-lucide="target" class="w-5 h-5 text-red-700"></i> Bảng Đánh Giá Chỉ Tiêu Cam Kết Với Đoàn Khảo Sát
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- Item 1 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-700">Tỷ lệ hồ sơ TTHC giải quyết đúng hạn</span>
+                                <span class="text-emerald-700 font-bold">Cam kết: ≥ 99% | Hiện tại: 99.4%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5">
+                                <div class="bg-emerald-600 h-2.5 rounded-full" style="width: 99.4%"></div>
+                            </div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-700">Kiến nghị người dân xử lý dứt điểm trong 24 giờ (Thứ 6)</span>
+                                <span class="text-blue-700 font-bold">Cam kết: ≥ 90% | Hiện tại: 94.2%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 94.2%"></div>
+                            </div>
+                        </div>
+                        <!-- Item 3 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-700">Nhiệm vụ trọng điểm hoàn thành đúng tiến độ</span>
+                                <span class="text-amber-700 font-bold">Mục tiêu: ≥ 95% | Hiện tại: 90%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5">
+                                <div class="bg-amber-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <!-- Item 4 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-700">Mức độ hài lòng của người dân đối với cấp ủy, chính quyền</span>
+                                <span class="text-emerald-700 font-bold">Cam kết: ≥ 98% | Hiện tại: 98.8%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5">
+                                <div class="bg-emerald-500 h-2.5 rounded-full" style="width: 98.8%"></div>
+                            </div>
+                        </div>
+                        <!-- Item 5 -->
+                        <div class="pt-2 grid grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 bg-red-50 rounded-lg border border-red-200">
+                                <div class="text-red-800 font-bold">Phản ánh tồn đọng quá 3 ngày:</div>
+                                <div class="text-lg font-extrabold text-red-700">0 Vụ việc</div>
+                                <div class="text-[11px] text-red-600 mt-0.5">Mục tiêu cam kết: 0 vụ việc</div>
+                            </div>
+                            <div class="p-3 bg-amber-50 rounded-lg border border-amber-200">
+                                <div class="text-amber-800 font-bold">Nhiệm vụ quá hạn không rõ nguyên nhân:</div>
+                                <div class="text-lg font-extrabold text-amber-700">0 Nhiệm vụ</div>
+                                <div class="text-[11px] text-amber-600 mt-0.5">Cảnh báo 100% khi có nguy cơ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right 1 col: Core principles highlight -->
+                <div class="bg-gradient-to-br from-red-900 to-red-950 text-white rounded-xl shadow-sm p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-amber-400 font-bold text-sm uppercase tracking-wider mb-2">
+                            <i data-lucide="compass" class="w-4 h-4"></i> Bộ Tiêu Chí Vận Hành
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-3">Triết Lý 3 Rõ – 3 Kiểm – 3 Kịp Thời</h4>
+                        <div class="space-y-3 text-xs">
+                            <div class="bg-white/10 p-2.5 rounded-lg border border-white/10">
+                                <span class="font-bold text-amber-300">● 3 RÕ:</span> Rõ việc (Sản phẩm cụ thể) – Rõ người (1 đầu mối chịu trách nhiệm) – Rõ tiến độ (Có mốc thời gian & mã màu).
+                            </div>
+                            <div class="bg-white/10 p-2.5 rounded-lg border border-white/10">
+                                <span class="font-bold text-amber-300">● 3 KIỂM:</span> Kiểm việc (Đúng kết luận/nghị quyết) – Kiểm người (Chủ trì & phối hợp) – Kiểm tiến độ (Sắp đến hạn, nguy cơ chậm).
+                            </div>
+                            <div class="bg-white/10 p-2.5 rounded-lg border border-white/10">
+                                <span class="font-bold text-amber-300">● 3 KỊP THỜI:</span> Kịp thời chỉ đạo – Kịp thời tháo gỡ điểm nghẽn – Kịp thời chịu trách nhiệm.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-red-800 text-[11px] text-red-200 italic text-center">
+                        "Giao việc rõ – Kiểm tra thật – Tháo gỡ nhanh – Kết quả đo được – Nhân dân hài lòng"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: QUẢN LÝ 20 NHIỆM VỤ ================= -->
+        <div id="section-tasks" class="hidden space-y-6">
+            <!-- Search & Actions Bar -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex flex-wrap items-center gap-3 w-full md:w-auto flex-1">
+                    <div class="relative w-full md:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i>
+                        <input type="text" id="task-search" oninput="renderTaskList()" placeholder="Tìm tên việc, mã NV, người..." class="w-full pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600">
+                    </div>
+                    <select id="filter-category" onchange="renderTaskList()" class="text-xs border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600">
+                        <option value="">Tất cả Lĩnh Vực</option>
+                        <option value="Lãnh đạo, chỉ đạo">Lãnh đạo, chỉ đạo</option>
+                        <option value="Lãnh đạo, điều hành">Lãnh đạo, điều hành</option>
+                        <option value="Quản trị nhiệm vụ">Quản trị nhiệm vụ</option>
+                        <option value="Cải cách hành chính">Cải cách hành chính</option>
+                        <option value="Phát triển kinh tế">Phát triển kinh tế</option>
+                        <option value="Đất đai, xây dựng">Đất đai, xây dựng</option>
+                        <option value="Thứ 6 không giấy hẹn">Thứ 6 không giấy hẹn</option>
+                    </select>
+                    <select id="filter-status" onchange="renderTaskList()" class="text-xs border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600">
+                        <option value="">Tất cả Trạng Thái</option>
+                        <option value="Hoàn thành">Xanh - Hoàn thành</option>
+                        <option value="Đang thực hiện">Vàng - Đang thực hiện</option>
+                        <option value="Nguy cơ chậm">Cam - Nguy cơ chậm</option>
+                        <option value="Quá hạn">Đỏ - Quá hạn</option>
+                    </select>
+                </div>
+                <button onclick="openTaskModal()" class="w-full md:w-auto bg-red-700 hover:bg-red-800 text-white font-semibold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 transition shadow">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i> Giao Nhiệm Vụ Mới (3 Rõ)
+                </button>
+            </div>
+
+            <!-- Task List Table -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                <th class="p-3 w-12 text-center">STT</th>
+                                <th class="p-3 w-20">Mã NV</th>
+                                <th class="p-3">Tên Nhiệm Vụ (Rõ việc)</th>
+                                <th class="p-3 w-36">Chủ Trì (Rõ người)</th>
+                                <th class="p-3 w-32">Lĩnh Vực</th>
+                                <th class="p-3 w-28">Thời Hạn (Rõ tiến độ)</th>
+                                <th class="p-3 w-28 text-center">Trạng Thái</th>
+                                <th class="p-3 w-28 text-center">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="task-table-body" class="divide-y divide-slate-200">
+                            <!-- Tasks populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: THỨ 6 KHÔNG GIẤY HẸN ================= -->
+        <div id="section-friday" class="hidden space-y-6">
+            <!-- Header section for Friday Model -->
+            <div class="bg-gradient-to-r from-red-800 via-red-900 to-amber-900 text-white p-6 rounded-xl shadow-md border-l-8 border-amber-400">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="bg-amber-400 text-red-950 font-black text-[10px] px-2.5 py-1 rounded uppercase tracking-wider">Đề xuất trọng điểm</span>
+                        <h2 class="text-xl font-bold mt-2">“MÔ HÌNH NGÀY THỨ SÁU KHÔNG GIẤY HẸN”</h2>
+                        <p class="text-xs text-red-100 mt-1">Đảng ủy xã Hòa Bình lãnh đạo giải quyết dứt điểm việc dân trong 24 giờ. Người dân đến xã không nhận giấy hẹn mới – Nhận kết quả ngay hoặc trước 24 giờ!</p>
+                    </div>
+                    <div class="text-right bg-black/20 p-3 rounded-lg border border-white/10">
+                        <div class="text-2xl font-black text-amber-300">24 GIỜ</div>
+                        <div class="text-[11px] text-slate-200">Cam kết giải quyết dứt điểm</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 Forces Alignment Section -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-center">
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-red-100 text-red-700 font-bold flex items-center justify-center mx-auto mb-1 text-xs">1</div>
+                    <div class="font-bold text-xs text-slate-800">Đảng Ủy</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">Lãnh đạo, giám sát & tiếp dân</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center mx-auto mb-1 text-xs">2</div>
+                    <div class="font-bold text-xs text-slate-800">UBND Xã</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">Bộ phận Một cửa giải quyết TTHC</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center mx-auto mb-1 text-xs">3</div>
+                    <div class="font-bold text-xs text-slate-800">Ủy Ban MTTQ</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">Giám sát xã hội & lắng nghe ý kiến</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center mx-auto mb-1 text-xs">4</div>
+                    <div class="font-bold text-xs text-slate-800">Công An Xã</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">Xử lý TTHC cư trú, ANTT</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center mx-auto mb-1 text-xs">5</div>
+                    <div class="font-bold text-xs text-slate-800">Các Đoàn Thể</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">Hỗ trợ số hóa & hướng dẫn người dân</div>
+                </div>
+            </div>
+
+            <!-- Secretary Open Door & Friday Log -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Secretary 60-min session -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-red-800 font-bold text-sm border-b pb-2 mb-3">
+                            <i data-lucide="user-check" class="w-5 h-5 text-red-700"></i> Lịch Tiếp Công Dân Của Bí Thư Đảng Ủy
+                        </div>
+                        <div class="p-3 bg-red-50 border border-red-200 rounded-lg mb-3">
+                            <div class="text-xs font-bold text-red-900">⏰ Khung giờ: 60 Phút cuối chiều thứ Sáu hàng tuần</div>
+                            <div class="text-[11px] text-red-800 mt-1">Bí thư Đảng ủy xã trực tiếp đối thoại, tiếp nghe phản ánh và chỉ đạo tháo gỡ dứt điểm các vướng mắc tồn đọng tại chỗ.</div>
+                        </div>
+                        <div class="text-xs text-slate-600 space-y-2">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                                <span>Tiếp nhận phản ánh liên ngành</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                                <span>Quyết định chỉ đạo trực tiếp trong 24h</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                                <span>Đánh giá mức độ hài lòng thực tế</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="alert('Đã ghi nhận đăng ký lịch gặp Bí thư Đảng ủy trong chiều thứ 6 tuần này!')" class="mt-4 w-full bg-red-800 hover:bg-red-900 text-white font-bold text-xs py-2 rounded-lg transition">
+                        Đăng Ký Gặp Bí Thư Chiều Thứ 6
+                    </button>
+                </div>
+
+                <!-- Live Friday Hồ Sơ Tracking Table -->
+                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                    <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center justify-between border-b pb-2">
+                        <span class="flex items-center gap-2"><i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i> Danh Sách Hồ Sơ Xử Lý Trong 24h (Thứ Sáu Hàng Tuần)</span>
+                        <span class="text-xs font-normal text-emerald-700 bg-emerald-50 px-2 py-1 rounded border border-emerald-200">100% Công Khai</span>
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left">
+                            <thead>
+                                <tr class="bg-slate-100 font-bold text-slate-700 border-b">
+                                    <th class="p-2">Mã Hồ Sơ</th>
+                                    <th class="p-2">Nội Dung Việc Dân</th>
+                                    <th class="p-2">Bộ Phận Xử Lý</th>
+                                    <th class="p-2">Thời Gian Nhận</th>
+                                    <th class="p-2">Cam Kết Khai Thác</th>
+                                    <th class="p-2 text-center">Trạng Thái</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-2 font-mono text-slate-600">HS-F01</td>
+                                    <td class="p-2 font-medium">Trích lục khai sinh & Xác nhận cư trú</td>
+                                    <td class="p-2">Bộ phận Một cửa - Công an xã</td>
+                                    <td class="p-2 text-slate-500">08:00 T6</td>
+                                    <td class="p-2 text-emerald-700 font-bold">Trả trước 11:30 T6</td>
+                                    <td class="p-2 text-center"><span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Đã Xử Lý</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-mono text-slate-600">HS-F02</td>
+                                    <td class="p-2 font-medium">Cấp đổi giấy chứng nhận QSD đất đai tồn đọng</td>
+                                    <td class="p-2">UBND xã (Địa chính)</td>
+                                    <td class="p-2 text-slate-500">09:15 T6</td>
+                                    <td class="p-2 text-blue-700 font-bold">Trả trước 17:00 T6</td>
+                                    <td class="p-2 text-center"><span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Đang Xử Lý</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-mono text-slate-600">HS-F03</td>
+                                    <td class="p-2 font-medium">Trợ cấp an sinh xã hội khẩn cấp đột xuất</td>
+                                    <td class="p-2">UBND + MTTQ xã</td>
+                                    <td class="p-2 text-slate-500">10:00 T6</td>
+                                    <td class="p-2 text-emerald-700 font-bold">Trả trước 16:30 T6</td>
+                                    <td class="p-2 text-center"><span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Đã Xử Lý</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 4: RÀ SOÁT 3 KIỂM & CẢNH BÁO ================= -->
+        <div id="section-audit" class="hidden space-y-6">
+            <!-- Alert Section for CAM & ĐỎ -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                <h3 class="font-bold text-red-800 text-base mb-3 flex items-center gap-2 border-b pb-2">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-orange-600"></i> Sổ Cảnh Báo Nhiệm Vụ Có Nguy Cơ Chậm (Cam) & Quá Hạn (Đỏ)
+                </h3>
+                <p class="text-xs text-slate-600 mb-4">Mô hình đặt ra cơ chế tự động cảnh báo để Thường trực Đảng ủy kịp thời chỉ đạo tháo gỡ điểm nghẽn, không để công việc bị tắc nghẽn kéo dài.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left">
+                        <thead>
+                            <tr class="bg-slate-100 font-bold text-slate-700 border-b">
+                                <th class="p-2.5">Mã NV</th>
+                                <th class="p-2.5">Tên Nhiệm Vụ</th>
+                                <th class="p-2.5">Chủ Trì</th>
+                                <th class="p-2.5">Mức Độ Cảnh Báo</th>
+                                <th class="p-2.5">Điểm Nghẽn / Vướng Mắc</th>
+                                <th class="p-2.5">Giải Pháp Tháo Gỡ (3 Kịp Thời)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="warning-table-body" class="divide-y divide-slate-200">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3 Kiểm Interactive Checklist Table (Phụ Lục 03) -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2 border-b pb-2">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600"></i> Bảng Rà Soát Định Kỳ "3 KIỂM" (Kiểm Việc - Kiểm Người - Kiểm Tiến Độ)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left">
+                        <thead>
+                            <tr class="bg-slate-100 font-bold text-slate-700 border-b">
+                                <th class="p-2.5 w-16">Mã NV</th>
+                                <th class="p-2.5">Nhiệm Vụ Rà Soát</th>
+                                <th class="p-2.5 text-center">1. Kiểm Việc</th>
+                                <th class="p-2.5 text-center">2. Kiểm Người</th>
+                                <th class="p-2.5 text-center">3. Kiểm Tiến Độ</th>
+                                <th class="p-2.5">Xử Lý Tiếp Theo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-table-body" class="divide-y divide-slate-200">
+                            <!-- Dynamic checklist populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 5: KHẢO SÁT 5 ĐIỂM & HỒ SƠ ================= -->
+        <div id="section-survey" class="hidden space-y-6">
+            <!-- 5 Survey Points Route -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2 border-b pb-2">
+                    <i data-lucide="map" class="w-5 h-5 text-red-700"></i> Chương Trình Khảo Sát Thực Tế - 05 Điểm Tham Quan
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mt-4">
+                    <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="font-bold text-red-800 text-xs mb-1">Điểm 1: Giới thiệu</div>
+                        <p class="text-[11px] text-slate-700">Tại Đảng ủy xã Hòa Bình. Giới thiệu tổng quan mục tiêu, điểm mới 3 Rõ – 3 Kiểm – 3 Kịp Thời.</p>
+                    </div>
+                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                        <div class="font-bold text-amber-900 text-xs mb-1">Điểm 2: Bảng số</div>
+                        <p class="text-[11px] text-slate-700">Trực tiếp xem bảng theo dõi số 20 nhiệm vụ trọng điểm & mã màu phân loại.</p>
+                    </div>
+                    <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="font-bold text-blue-900 text-xs mb-1">Điểm 3: Kiểm chứng</div>
+                        <p class="text-[11px] text-slate-700">Kiểm chứng 01 nhiệm vụ thực tế từ lúc giao việc đến khi xuất sản phẩm hoàn thành.</p>
+                    </div>
+                    <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                        <div class="font-bold text-emerald-900 text-xs mb-1">Điểm 4: Trao đổi</div>
+                        <p class="text-[11px] text-slate-700">Trao đổi trực tiếp với cán bộ chủ trì thực hiện về cách kiểm tra, cảnh báo, tháo gỡ.</p>
+                    </div>
+                    <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                        <div class="font-bold text-indigo-900 text-xs mb-1">Điểm 5: Ý kiến dân</div>
+                        <p class="text-[11px] text-slate-700">Gặp gỡ người dân tại Bộ phận Một cửa để ghi nhận đánh giá chất lượng phục vụ 24h.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents & Checklist (Phụ Lục 06 & 12) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Phụ lục 06: Hồ sơ tài liệu -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                    <h3 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2 border-b pb-2">
+                        <i data-lucide="folder-check" class="w-4 h-4 text-emerald-600"></i> Phụ Lục 06: Danh Mục Hồ Sơ Tài Liệu Minh Chứng
+                    </h3>
+                    <ul class="space-y-2 text-xs text-slate-700">
+                        <li class="p-2 bg-slate-50 rounded flex items-center justify-between border">
+                            <span>01. Hồ sơ đăng ký mô hình (Phiếu, quy trình)</span>
+                            <span class="text-emerald-700 font-bold">✓ Đã chuẩn bị</span>
+                        </li>
+                        <li class="p-2 bg-slate-50 rounded flex items-center justify-between border">
+                            <span>02. Bảng theo dõi 20 nhiệm vụ trọng điểm</span>
+                            <span class="text-emerald-700 font-bold">✓ Đã cập nhật số</span>
+                        </li>
+                        <li class="p-2 bg-slate-50 rounded flex items-center justify-between border">
+                            <span>03. Phiếu giao nhiệm vụ (Có sản phẩm cụ thể)</span>
+                            <span class="text-emerald-700 font-bold">✓ Đã lưu file</span>
+                        </li>
+                        <li class="p-2 bg-slate-50 rounded flex items-center justify-between border">
+                            <span>04. Báo cáo rà soát định kỳ 3 kiểm</span>
+                            <span class="text-emerald-700 font-bold">✓ Đã hoàn thiện</span>
+                        </li>
+                        <li class="p-2 bg-slate-50 rounded flex items-center justify-between border">
+                            <span>05. Hồ sơ tháo gỡ điểm nghẽn (Văn bản chỉ đạo)</span>
+                            <span class="text-emerald-700 font-bold">✓ Đã sẵn sàng</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Phụ lục 12: Checklist đăng ký -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                    <h3 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2 border-b pb-2">
+                        <i data-lucide="clipboard-check" class="w-4 h-4 text-blue-600"></i> Phụ Lục 12: Checklist Hoàn Thiện Trước Khảo Sát
+                    </h3>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded border cursor-pointer">
+                            <input type="checkbox" checked class="w-4 h-4 text-red-700 rounded">
+                            <span>Phiếu đăng ký đã thống nhất tên mô hình, đơn vị và lĩnh vực</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded border cursor-pointer">
+                            <input type="checkbox" checked class="w-4 h-4 text-red-700 rounded">
+                            <span>Bảng 20 nhiệm vụ đã đối chiếu với văn bản giao việc thực tế</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded border cursor-pointer">
+                            <input type="checkbox" checked class="w-4 h-4 text-red-700 rounded">
+                            <span>Có ít nhất 01 nhiệm vụ đủ hồ sơ minh chứng trọn gói</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded border cursor-pointer">
+                            <input type="checkbox" checked class="w-4 h-4 text-red-700 rounded">
+                            <span>Đã bố trí 05 điểm tham quan và cán bộ đầu mối đón tiếp</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal Form Thêm / Sửa Nhiệm Vụ (3 Rõ) -->
+    <div id="task-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden border border-slate-200">
+            <div class="bg-red-800 text-white p-4 flex justify-between items-center">
+                <h3 id="modal-title" class="font-bold text-sm flex items-center gap-2">
+                    <i data-lucide="file-plus" class="w-4 h-4"></i> Phiếu Giao Nhiệm Vụ Mới (Mô hình 3 Rõ)
+                </h3>
+                <button onclick="closeTaskModal()" class="text-slate-200 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <form id="task-form" onsubmit="saveTask(event)" class="p-5 space-y-4 text-xs">
+                <input type="hidden" id="modal-task-id">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Mã Nhiệm Vụ *</label>
+                        <input type="text" id="modal-code" placeholder="NV-01" required class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Lĩnh Vực *</label>
+                        <select id="modal-category" required class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
+                            <option value="Lãnh đạo, chỉ đạo">Lãnh đạo, chỉ đạo</option>
+                            <option value="Lãnh đạo, điều hành">Lãnh đạo, điều hành</option>
+                            <option value="Quản trị nhiệm vụ">Quản trị nhiệm vụ</option>
+                            <option value="Cải cách hành chính">Cải cách hành chính</option>
+                            <option value="Phát triển kinh tế">Phát triển kinh tế</option>
+                            <option value="Đất đai, xây dựng">Đất đai, xây dựng</option>
+                            <option value="Thứ 6 không giấy hẹn">Thứ 6 không giấy hẹn</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Nội Dung Nhiệm Vụ (Rõ việc) *</label>
+                    <textarea id="modal-title-input" rows="2" placeholder="Ghi rõ nội dung và yêu cầu sản phẩm đầu ra..." required class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none"></textarea>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Chủ Trì (Rõ người) *</label>
+                        <input type="text" id="modal-assignee" placeholder="Thường trực Đảng ủy / UBND..." required class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Đơn Vị Phối Hợp</label>
+                        <input type="text" id="modal-partner" placeholder="Văn phòng, MTTQ, Đoàn thể..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Thời Hạn Hoàn Thành (Rõ tiến độ) *</label>
+                        <input type="date" id="modal-duedate" required class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Trạng Thái Theo Mã Màu *</label>
+                        <select id="modal-status" required class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
+                            <option value="Hoàn thành">Xanh - Hoàn thành</option>
+                            <option value="Đang thực hiện">Vàng - Đang thực hiện đúng hạn</option>
+                            <option value="Nguy cơ chậm">Cam - Có nguy cơ chậm tiến độ</option>
+                            <option value="Quá hạn">Đỏ - Đã quá hạn</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Điểm Nghẽn / Khó Khăn & Chỉ Đạo Tháo Gỡ (Nếu có)</label>
+                    <textarea id="modal-note" rows="2" placeholder="Ghi nhận vướng mắc và nội dung chỉ đạo tháo gỡ của Thường trực..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2 border-t">
+                    <button type="button" onclick="closeTaskModal()" class="px-4 py-2 border border-slate-300 rounded text-slate-700 hover:bg-slate-100 font-medium">Hủy</button>
+                    <button type="submit" class="px-4 py-2 bg-red-800 hover:bg-red-900 text-white font-bold rounded shadow">Lưu Nhiệm Vụ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal QR Code Viewer -->
+    <div id="qr-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-sm text-center border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-sm mb-1" id="qr-task-code">MÃ QR NHIỆM VỤ</h3>
+            <p class="text-xs text-slate-500 mb-4" id="qr-task-title">Quét mã QR để truy xuất tiến độ và người phụ trách</p>
+            <div id="qrcode" class="flex justify-center my-4 p-3 bg-slate-50 border rounded-lg"></div>
+            <button onclick="closeQRModal()" class="w-full bg-slate-800 text-white font-bold text-xs py-2 rounded-lg mt-2">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-5 mt-auto border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
+            <div>
+                <div class="font-bold text-slate-200">ĐẢNG ỦY XÃ HÒA BÌNH - TỈNH CÀ MAU</div>
+                <div>Hệ thống quản trị nhiệm vụ theo Mô hình "3 Rõ – 3 Kiểm – 3 Kịp Thời" & "Ngày thứ 6 không giấy hẹn"</div>
+            </div>
+            <div class="text-[11px] text-slate-500">
+                Phiên bản V2.0 - Năm 2026 | Tích hợp theo dõi số hóa 100%
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // 20 Sample Tasks from Phụ Lục 01 of the Document
+        const initialTasks = [
+            { id: 1, code: 'NV-01', category: 'Lãnh đạo, chỉ đạo', title: 'Rà soát, cụ thể hóa và theo dõi thực hiện nghị quyết, kết luận của Đảng ủy', assignee: 'Thường trực Đảng ủy', partner: 'Văn phòng, UBND, MTTQ', dueDate: '2026-09-30', status: 'Hoàn thành', note: 'Đã ban hành chương trình hành động đầy đủ' },
+            { id: 2, code: 'NV-02', category: 'Lãnh đạo, điều hành', title: 'Tổng hợp nhiệm vụ sau các cuộc họp để giao rõ việc, rõ người, rõ tiến độ', assignee: 'Văn phòng Đảng ủy', partner: 'Các bộ phận liên quan', dueDate: '2026-09-25', status: 'Hoàn thành', note: 'Đã ban hành thông báo kết luận ngay sau họp' },
+            { id: 3, code: 'NV-03', category: 'Quản trị nhiệm vụ', title: 'Thiết lập và cập nhật bảng theo dõi 20 nhiệm vụ trọng điểm', assignee: 'Văn phòng Đảng ủy', partner: 'Các đơn vị chủ trì', dueDate: '2026-09-20', status: 'Hoàn thành', note: 'Bảng số hoạt động liên tục' },
+            { id: 4, code: 'NV-04', category: 'Lãnh đạo, chỉ đạo', title: 'Rà soát nhiệm vụ sắp đến hạn, nguy cơ chậm và quá hạn để xử lý', assignee: 'Thường trực Đảng ủy', partner: 'Các đơn vị liên quan', dueDate: '2026-10-05', status: 'Đang thực hiện', note: 'Rà soát định kỳ thứ 5 hàng tuần' },
+            { id: 5, code: 'NV-05', category: 'Lãnh đạo, điều hành', title: 'Xử lý nhiệm vụ khó, phức tạp, liên ngành hoặc vướng cơ chế, nguồn lực', assignee: 'Thường trực Đảng ủy', partner: 'UBND, MTTQ, Đoàn thể', dueDate: '2026-10-10', status: 'Nguy cơ chậm', note: 'Đang vướng cơ chế giải phóng mặt bằng, chờ họp chỉ đạo' },
+            { id: 6, code: 'NV-06', category: 'Lãnh đạo, chỉ đạo', title: 'Theo dõi phân công, phối hợp trong vận hành chính quyền 2 cấp', assignee: 'Thường trực Đảng ủy', partner: 'UBND xã', dueDate: '2026-09-28', status: 'Đang thực hiện', note: 'Tiến độ đảm bảo' },
+            { id: 7, code: 'NV-07', category: 'Cải cách hành chính', title: 'Theo dõi tiến độ giải quyết thủ tục hành chính, hồ sơ đúng hạn tại Một cửa', assignee: 'UBND xã', partner: 'Bộ phận Một cửa', dueDate: '2026-09-30', status: 'Hoàn thành', note: 'Tỷ lệ đúng hạn đạt 99.4%' },
+            { id: 8, code: 'NV-08', category: 'Quản trị nhiệm vụ', title: 'Cập nhật bảng theo dõi số, tiến độ nhiệm vụ phục vụ chỉ đạo', assignee: 'Văn phòng Đảng ủy', partner: 'Cán bộ phụ trách CĐS', dueDate: '2026-09-22', status: 'Hoàn thành', note: 'Dữ liệu được làm sạch liên tục' },
+            { id: 9, code: 'NV-09', category: 'Phát triển kinh tế', title: 'Theo dõi nhiệm vụ, chỉ tiêu phát triển kinh tế theo kế hoạch năm', assignee: 'UBND xã', partner: 'Bộ phận chuyên môn', dueDate: '2026-11-15', status: 'Đang thực hiện', note: 'Các chỉ tiêu đạt 85% kế hoạch' },
+            { id: 10, code: 'NV-10', category: 'Đất đai, xây dựng', title: 'Theo dõi tiến độ công trình, dự án và tháo gỡ khó khăn phát sinh', assignee: 'UBND xã', partner: 'Bộ phận chuyên môn', dueDate: '2026-10-01', status: 'Nguy cơ chậm', note: 'Thời tiết mưa kéo dài ảnh hưởng thi công' },
+            { id: 11, code: 'NV-11', category: 'Phát triển kinh tế', title: 'Theo dõi phân bổ, sử dụng và điều hành ngân sách theo nghị quyết', assignee: 'UBND xã', partner: 'Bộ phận tài chính', dueDate: '2026-12-31', status: 'Đang thực hiện', note: 'Giải ngân đúng kế hoạch' },
+            { id: 12, code: 'NV-12', category: 'Đất đai, xây dựng', title: 'Theo dõi xử lý hồ sơ, vụ việc đất đai tồn đọng kéo dài', assignee: 'UBND xã', partner: 'Địa chính, Tư pháp', dueDate: '2026-09-15', status: 'Quá hạn', note: 'Vướng tranh chấp ranh giới chưa giải quyết xong' },
+            { id: 13, code: 'NV-13', category: 'Lãnh đạo, điều hành', title: 'Theo dõi nhiệm vụ an sinh xã hội, đối tượng chính sách khẩn cấp', assignee: 'UBND xã', partner: 'MTTQ, Đoàn thể', dueDate: '2026-09-29', status: 'Hoàn thành', note: 'Chi trả đúng và đủ 100%' },
+            { id: 14, code: 'NV-14', category: 'Lãnh đạo, điều hành', title: 'Theo dõi nhiệm vụ giáo dục, y tế, văn hóa, giảm nghèo bền vững', assignee: 'UBND xã', partner: 'Các bộ phận liên quan', dueDate: '2026-10-20', status: 'Đang thực hiện', note: 'Đang triển khai đợt rà soát hộ nghèo' },
+            { id: 15, code: 'NV-15', category: 'Lãnh đạo, chỉ đạo', title: 'Theo dõi nhiệm vụ quốc phòng, an ninh và xử lý phát sinh', assignee: 'Công an, Quân sự xã', partner: 'Các đơn vị liên quan', dueDate: '2026-09-30', status: 'Hoàn thành', note: 'Đảm bảo an toàn tuyệt đối địa bàn' },
+            { id: 16, category: 'Lãnh đạo, chỉ đạo', code: 'NV-16', title: 'Theo dõi tuyên truyền, vận động Nhân dân hưởng ứng phong trào', assignee: 'MTTQ và đoàn thể', partner: 'Đảng ủy, UBND', dueDate: '2026-10-15', status: 'Đang thực hiện', note: 'Dân hưởng ứng tích cực' },
+            { id: 17, category: 'Lãnh đạo, điều hành', code: 'NV-17', title: 'Theo dõi kiện toàn, phân công hoạt động của các tổ chức bộ phận', assignee: 'Đảng ủy', partner: 'UBND, MTTQ', dueDate: '2026-09-25', status: 'Hoàn thành', note: 'Đã kiện toàn nhân sự đủ' },
+            { id: 18, category: 'Lãnh đạo, chỉ đạo', code: 'NV-18', title: 'Theo dõi sinh hoạt chi bộ, phát triển đảng viên mới', assignee: 'Đảng ủy', partner: 'Các chi bộ trực thuộc', dueDate: '2026-10-30', status: 'Đang thực hiện', note: 'Đã kết nạp 8/10 chỉ tiêu' },
+            { id: 19, category: 'Thứ 6 không giấy hẹn', code: 'NV-19', title: 'Theo dõi tiếp công dân và giải quyết dứt điểm phản ánh trong 24h', assignee: 'Thường trực Đảng ủy/UBND', partner: '5 Lực lượng phối hợp', dueDate: '2026-09-25', status: 'Hoàn thành', note: 'Xử lý 100% phản ánh trong ngày thứ 6' },
+            { id: 20, category: 'Quản trị nhiệm vụ', code: 'NV-20', title: 'Hoàn thiện hồ sơ minh chứng, tổ chức khảo sát và đề xuất nhân rộng', assignee: 'Văn phòng Đảng ủy', partner: 'Các đơn vị liên quan', dueDate: '2026-10-05', status: 'Đang thực hiện', note: 'Sẵn sàng đón Đoàn khảo sát' }
+        ];
+
+        let tasks = JSON.parse(localStorage.getItem('tasks_hoabinh_v2')) || initialTasks;
+
+        // Save & Render Core
+        function saveData() {
+            localStorage.setItem('tasks_hoabinh_v2', JSON.stringify(tasks));
+            renderAll();
+        }
+
+        function loadSampleData() {
+            if(confirm("Bạn có muốn khôi phục danh mục 20 Nhiệm Vụ Trọng Điểm chuẩn từ Hồ sơ đăng ký?")) {
+                tasks = JSON.parse(JSON.stringify(initialTasks));
+                saveData();
+            }
+        }
+
+        // Tab Switcher
+        function switchTab(tabName) {
+            ['dashboard', 'tasks', 'friday', 'audit', 'survey'].forEach(t => {
+                document.getElementById(`section-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('active');
+            });
+            document.getElementById(`section-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            lucide.createIcons();
+        }
+
+        // Render Functions
+        function renderAll() {
+            updateDashboardKPI();
+            renderTaskList();
+            renderAuditSection();
+            lucide.createIcons();
+        }
+
+        function updateDashboardKPI() {
+            const total = tasks.length;
+            const green = tasks.filter(t => t.status === 'Hoàn thành').length;
+            const yellow = tasks.filter(t => t.status === 'Đang thực hiện').length;
+            const orange = tasks.filter(t => t.status === 'Nguy cơ chậm').length;
+            const red = tasks.filter(t => t.status === 'Quá hạn').length;
+
+            document.getElementById('kpi-total').innerText = total;
+            document.getElementById('kpi-green').innerText = green;
+            document.getElementById('kpi-green-pct').innerText = `Đạt ${total ? Math.round((green/total)*100) : 0}% tổng số`;
+            document.getElementById('kpi-yellow').innerText = yellow;
+            document.getElementById('kpi-orange').innerText = orange;
+            document.getElementById('kpi-red').innerText = red;
+        }
+
+        function renderTaskList() {
+            const tbody = document.getElementById('task-table-body');
+            const search = document.getElementById('task-search').value.toLowerCase();
+            const filterCat = document.getElementById('filter-category').value;
+            const filterStat = document.getElementById('filter-status').value;
+
+            tbody.innerHTML = '';
+
+            const filtered = tasks.filter(t => {
+                const matchSearch = t.title.toLowerCase().includes(search) || t.code.toLowerCase().includes(search) || t.assignee.toLowerCase().includes(search);
+                const matchCat = filterCat === '' || t.category === filterCat;
+                const matchStat = filterStat === '' || t.status === filterStat;
+                return matchSearch && matchCat && matchStat;
+            });
+
+            filtered.forEach((t, index) => {
+                let badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                if(t.status === 'Hoàn thành') badgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+                if(t.status === 'Nguy cơ chậm') badgeClass = 'bg-orange-100 text-orange-800 border-orange-300';
+                if(t.status === 'Quá hạn') badgeClass = 'bg-red-100 text-red-800 border-red-300';
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-3 text-center text-slate-500 font-medium">${index + 1}</td>
+                        <td class="p-3 font-mono font-bold text-red-800">${t.code}</td>
+                        <td class="p-3">
+                            <div class="font-bold text-slate-800">${t.title}</div>
+                            ${t.note ? `<div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: ${t.note}</div>` : ''}
+                        </td>
+                        <td class="p-3 font-medium text-slate-700">${t.assignee}</td>
+                        <td class="p-3 text-slate-600">${t.category}</td>
+                        <td class="p-3 font-mono text-slate-600">${t.dueDate}</td>
+                        <td class="p-3 text-center">
+                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border ${badgeClass}">
+                                ${t.status}
+                            </span>
+                        </td>
+                        <td class="p-3 text-center">
+                            <div class="flex justify-center items-center gap-1">
+                                <button onclick="showQR('${t.code}', '${t.title}')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><i data-lucide="qr-code" class="w-4 h-4"></i></button>
+                                <button onclick="editTask(${t.id})" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><i data-lucide="edit" class="w-4 h-4"></i></button>
+                                <button onclick="deleteTask(${t.id})" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderAuditSection() {
+            // Render warning table for CAM and ĐỎ
+            const warningBody = document.getElementById('warning-table-body');
+            warningBody.innerHTML = '';
+            const warningTasks = tasks.filter(t => t.status === 'Nguy cơ chậm' || t.status === 'Quá hạn');
+
+            if(warningTasks.length === 0) {
+                warningBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500 italic">Hiện không có nhiệm vụ nào thuộc diện cảnh báo Cam hoặc Đỏ. Đảm bảo tiến độ 100%!</td></tr>`;
+            } else {
+                warningTasks.forEach(t => {
+                    const badge = t.status === 'Quá hạn' ? 'bg-red-100 text-red-800' : 'bg-orange-100 text-orange-800';
+                    warningBody.innerHTML += `
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-2.5 font-bold font-mono text-red-800">${t.code}</td>
+                            <td class="p-2.5 font-medium">${t.title}</td>
+                            <td class="p-2.5">${t.assignee}</td>
+                            <td class="p-2.5"><span class="px-2 py-0.5 text-[10px] font-bold rounded ${badge}">${t.status}</span></td>
+                            <td class="p-2.5 text-slate-600">${t.note || 'Chưa ghi nhận rõ nguyên nhân'}</td>
+                            <td class="p-2.5 text-blue-800 font-medium">Báo cáo Thường trực Đảng ủy chỉ đạo tháo gỡ trực tiếp</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Render 3-Kiểm checklist table
+            const auditBody = document.getElementById('audit-table-body');
+            auditBody.innerHTML = '';
+            tasks.slice(0, 8).forEach(t => {
+                auditBody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-2.5 font-mono font-bold text-slate-600">${t.code}</td>
+                        <td class="p-2.5 font-medium">${t.title}</td>
+                        <td class="p-2.5 text-center"><span class="text-emerald-700 font-bold">✓ Đạt</span></td>
+                        <td class="p-2.5 text-center"><span class="text-emerald-700 font-bold">✓ Rõ (${t.assignee})</span></td>
+                        <td class="p-2.5 text-center"><span class="font-bold ${t.status === 'Hoàn thành' ? 'text-emerald-700' : 'text-amber-700'}">${t.status}</span></td>
+                        <td class="p-2.5 text-slate-500">Tiếp tục đôn đốc theo dõi</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Task CRUD Modals
+        function openTaskModal() {
+            document.getElementById('task-form').reset();
+            document.getElementById('modal-task-id').value = '';
+            document.getElementById('modal-title').innerText = "Phiếu Giao Nhiệm Vụ Mới (Mô hình 3 Rõ)";
+            document.getElementById('modal-code').value = `NV-${String(tasks.length + 1).padStart(2, '0')}`;
+            document.getElementById('task-modal').classList.remove('hidden');
+        }
+
+        function closeTaskModal() {
+            document.getElementById('task-modal').classList.add('hidden');
+        }
+
+        function editTask(id) {
+            const t = tasks.find(item => item.id === id);
+            if(!t) return;
+            document.getElementById('modal-task-id').value = t.id;
+            document.getElementById('modal-code').value = t.code;
+            document.getElementById('modal-category').value = t.category;
+            document.getElementById('modal-title-input').value = t.title;
+            document.getElementById('modal-assignee').value = t.assignee;
+            document.getElementById('modal-partner').value = t.partner || '';
+            document.getElementById('modal-duedate').value = t.dueDate;
+            document.getElementById('modal-status').value = t.status;
+            document.getElementById('modal-note').value = t.note || '';
+
+            document.getElementById('modal-title').innerText = "Cập Nhật Nhiệm Vụ (3 Rõ - 3 Kiểm)";
+            document.getElementById('task-modal').classList.remove('hidden');
+        }
+
+        function saveTask(e) {
+            e.preventDefault();
+            const id = document.getElementById('modal-task-id').value;
+            const code = document.getElementById('modal-code').value;
+            const category = document.getElementById('modal-category').value;
+            const title = document.getElementById('modal-title-input').value;
+            const assignee = document.getElementById('modal-assignee').value;
+            const partner = document.getElementById('modal-partner').value;
+            const dueDate = document.getElementById('modal-duedate').value;
+            const status = document.getElementById('modal-status').value;
+            const note = document.getElementById('modal-note').value;
+
+            if(id) {
+                const idx = tasks.findIndex(t => t.id == id);
+                if(idx !== -1) {
+                    tasks[idx] = { id: Number(id), code, category, title, assignee, partner, dueDate, status, note };
+                }
+            } else {
+                tasks.push({
+                    id: Date.now(),
+                    code, category, title, assignee, partner, dueDate, status, note
+                });
+            }
+
+            saveData();
+            closeTaskModal();
+        }
+
+        function deleteTask(id) {
+            if(confirm("Bạn có chắc chắn muốn xóa nhiệm vụ này khỏi danh mục theo dõi?")) {
+                tasks = tasks.filter(t => t.id !== id);
+                saveData();
+            }
+        }
+
+        // QR Code Modal Viewer
+        function showQR(code, title) {
+            document.getElementById('qr-task-code').innerText = `MÃ QR TRUY XUẤT: ${code}`;
+            document.getElementById('qr-task-title').innerText = title;
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+            new QRCode(qrContainer, {
+                text: `${window.location.origin}${window.location.pathname}#nhiem-vu=${encodeURIComponent(code)}`,
+                width: 128,
+                height: 128
+            });
+            document.getElementById('qr-modal').classList.remove('hidden');
+        }
+
+        function closeQRModal() {
+            document.getElementById('qr-modal').classList.add('hidden');
+        }
+
+        // Export to CSV
+        function exportCSV() {
+            let csv = '\uFEFF';
+            csv += "STT,Mã Nhiệm Vụ,Lĩnh Vực,Tên Nhiệm Vụ (Rõ Việc),Người Phụ Trách (Rõ Người),Đơn Vị Phối Hợp,Thời Hạn (Rõ Tiến Độ),Trạng Thái,Ghi Chú Minh Chứng\n";
+            tasks.forEach((t, i) => {
+                csv += `"${i+1}","${t.code}","${t.category}","${t.title}","${t.assignee}","${t.partner || ''}","${t.dueDate}","${t.status}","${t.note || ''}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `Danh_Sach_20_Nhiem_Vu_Dang_Uy_Hoa_Binh_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
+        }
+
+        // Initialize App
+        window.onload = function() {
+            renderAll();
+        };
+    </script>
+</body>
+</html>
