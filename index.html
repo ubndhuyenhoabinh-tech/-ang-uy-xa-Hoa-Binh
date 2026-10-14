@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0060)https://ubndhuyenhoabinh-tech.github.io/-ang-uy-xa-Hoa-Binh/ -->
 <html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,7 @@
     <meta name="theme-color" content="#b91c1c">
     <meta name="robots" content="index,follow">
     <!-- Tailwind CSS CDN -->
-    <script src="./Đảng ủy xã Hòa Bình - Mô hình 3 Rõ, 3 Kiểm, 3 Kịp Thời_files/saved_resource"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -26,18 +25,19 @@
         }
     </script>
     <!-- Lucide Icons -->
-    <script src="./Đảng ủy xã Hòa Bình - Mô hình 3 Rõ, 3 Kiểm, 3 Kịp Thời_files/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <!-- QR Code Generator Lib -->
-    <script src="./Đảng ủy xã Hòa Bình - Mô hình 3 Rõ, 3 Kiểm, 3 Kịp Thời_files/qrcode.min.js.download"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <!-- Firebase (đồng bộ dữ liệu dùng chung thời gian thực - xem hướng dẫn cấu hình trong nút "Đồng Bộ" ở đầu trang) -->
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
-    <!-- SheetJS: đọc file Excel/CSV xuất từ hệ thống Một cửa điện tử để nhập nhanh hồ sơ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
+        .progress-track { background-color: #e2e8f0; border-radius: 9999px; height: 6px; overflow: hidden; width: 100%; }
+        .progress-fill { height: 100%; }
+        .clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .tab-btn.active {
             border-bottom: 3px solid #b91c1c;
             color: #b91c1c;
@@ -108,7 +108,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true" class="lucide lucide-layout-dashboard w-4 h-4"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg> Dashboard &amp; Chỉ Tiêu Cam Kết
             </button>
             <button onclick="switchTab('tasks')" id="tab-tasks" class="tab-btn py-3.5 px-3 flex items-center gap-2 whitespace-nowrap hover:text-red-700 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="list-todo" aria-hidden="true" class="lucide lucide-list-todo w-4 h-4"><path d="M13 5h8"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path d="m3 17 2 2 4-4"></path><rect x="3" y="4" width="6" height="6" rx="1"></rect></svg> Quản Lý 20 Nhiệm Vụ Trọng Điểm
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="list-todo" aria-hidden="true" class="lucide lucide-list-todo w-4 h-4"><path d="M13 5h8"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path d="m3 17 2 2 4-4"></path><rect x="3" y="4" width="6" height="6" rx="1"></rect></svg> Quản Lý 42 Nhiệm Vụ Trọng Điểm (T10-T12/2026)
             </button>
             <button onclick="switchTab('friday')" id="tab-friday" class="tab-btn py-3.5 px-3 flex items-center gap-2 whitespace-nowrap hover:text-red-700 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clock" aria-hidden="true" class="lucide lucide-clock w-4 h-4"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> Module "Thứ 6 Không Giấy Hẹn"
@@ -137,12 +137,12 @@
                 </div>
                 <div class="flex gap-2">
                     <button data-permission="admin_only" onclick="loadSampleData()" class="text-xs bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-3 py-2 rounded-lg font-medium flex items-center gap-1.5 transition shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" aria-hidden="true" class="lucide lucide-rotate-ccw w-3.5 h-3.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg> Nạp Dữ Liệu Mẫu (20 NV)
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" aria-hidden="true" class="lucide lucide-rotate-ccw w-3.5 h-3.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg> Nạp Dữ Liệu Mẫu (42 NV)
                     </button>
                     <button onclick="exportCSV()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-lg font-medium flex items-center gap-1.5 transition shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" class="lucide lucide-download w-3.5 h-3.5"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> Xuất Excel/CSV
                     </button>
-                    <button onclick="exportFullData()" class="text-xs bg-blue-700 hover:bg-blue-800 text-white px-3 py-2 rounded-lg font-medium flex items-center gap-1.5 transition shadow-sm" title="Xuất toàn bộ dữ liệu hệ thống (JSON) để lưu trữ hoặc gửi cho đơn vị khác">
+                    <button data-permission="admin_only" onclick="exportFullData()" class="text-xs bg-blue-700 hover:bg-blue-800 text-white px-3 py-2 rounded-lg font-medium flex items-center gap-1.5 transition shadow-sm" title="Xuất toàn bộ dữ liệu hệ thống (JSON) để lưu trữ hoặc gửi cho đơn vị khác">
                         <i data-lucide="database-backup" class="w-3.5 h-3.5"></i> Xuất Toàn Bộ Dữ Liệu
                     </button>
                     <label data-permission="admin_only" class="text-xs bg-amber-600 hover:bg-amber-700 text-white px-3 py-2 rounded-lg font-medium flex items-center gap-1.5 transition shadow-sm cursor-pointer" title="Nhập tệp dữ liệu (JSON) đã xuất từ máy khác để đồng bộ hệ thống dùng chung">
@@ -238,14 +238,10 @@
                         <input type="text" id="task-search" oninput="renderTaskList()" placeholder="Tìm tên việc, mã NV, người..." class="w-full pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600">
                     </div>
                     <select id="filter-category" onchange="renderTaskList()" class="text-xs border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600">
-                        <option value="">Tất cả Lĩnh Vực</option>
-                        <option value="Lãnh đạo, chỉ đạo">Lãnh đạo, chỉ đạo</option>
-                        <option value="Lãnh đạo, điều hành">Lãnh đạo, điều hành</option>
-                        <option value="Quản trị nhiệm vụ">Quản trị nhiệm vụ</option>
-                        <option value="Cải cách hành chính">Cải cách hành chính</option>
-                        <option value="Phát triển kinh tế">Phát triển kinh tế</option>
-                        <option value="Đất đai, xây dựng">Đất đai, xây dựng</option>
-                        <option value="Thứ 6 không giấy hẹn">Thứ 6 không giấy hẹn</option>
+                        <option value="">Tất cả các tháng</option>
+                        <option value="Tháng 10/2026">Tháng 10/2026</option>
+                        <option value="Tháng 11/2026">Tháng 11/2026</option>
+                        <option value="Tháng 12/2026">Tháng 12/2026</option>
                     </select>
                     <select id="filter-status" onchange="renderTaskList()" class="text-xs border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600">
                         <option value="">Tất cả Trạng Thái</option>
@@ -270,492 +266,15 @@
                                 <th class="p-3 w-20">Mã NV</th>
                                 <th class="p-3">Tên Nhiệm Vụ (Rõ việc)</th>
                                 <th class="p-3 w-36">Chủ Trì (Rõ người)</th>
-                                <th class="p-3 w-32">Lĩnh Vực</th>
+                                <th class="p-3 w-32">Tháng Thực Hiện</th>
                                 <th class="p-3 w-28">Thời Hạn (Rõ tiến độ)</th>
+                                <th class="p-3 w-44">Kết Quả Đã Thực Hiện</th>
+                                <th class="p-3 w-24 text-center">% Tiến Độ</th>
                                 <th class="p-3 w-28 text-center">Trạng Thái</th>
                                 <th class="p-3 w-28 text-center">Thao Tác</th>
                             </tr>
                         </thead>
                         <tbody id="task-table-body" class="divide-y divide-slate-200">
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">1</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-01</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Rà soát, cụ thể hóa và theo dõi thực hiện nghị quyết, kết luận của Đảng ủy</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Đã ban hành chương trình hành động đầy đủ</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Thường trực Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, chỉ đạo</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-30</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-01', 'Rà soát, cụ thể hóa và theo dõi thực hiện nghị quyết, kết luận của Đảng ủy')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(1)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(1)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">2</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-02</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Tổng hợp nhiệm vụ sau các cuộc họp để giao rõ việc, rõ người, rõ tiến độ</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Đã ban hành thông báo kết luận ngay sau họp</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Văn phòng Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, điều hành</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-25</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-02', 'Tổng hợp nhiệm vụ sau các cuộc họp để giao rõ việc, rõ người, rõ tiến độ')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(2)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(2)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">3</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-03</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Thiết lập và cập nhật bảng theo dõi 20 nhiệm vụ trọng điểm</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Bảng số hoạt động liên tục</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Văn phòng Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Quản trị nhiệm vụ</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-20</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-03', 'Thiết lập và cập nhật bảng theo dõi 20 nhiệm vụ trọng điểm')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(3)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(3)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">4</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-04</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Rà soát nhiệm vụ sắp đến hạn, nguy cơ chậm và quá hạn để xử lý</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Rà soát định kỳ thứ 5 hàng tuần</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Thường trực Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, chỉ đạo</td>
-                        <td class="p-3 font-mono text-slate-600">2026-10-05</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-04', 'Rà soát nhiệm vụ sắp đến hạn, nguy cơ chậm và quá hạn để xử lý')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(4)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(4)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">5</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-05</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Xử lý nhiệm vụ khó, phức tạp, liên ngành hoặc vướng cơ chế, nguồn lực</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Đang vướng cơ chế giải phóng mặt bằng, chờ họp chỉ đạo</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Thường trực Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, điều hành</td>
-                        <td class="p-3 font-mono text-slate-600">2026-10-10</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-orange-100 text-orange-800 border-orange-300">
-                                Nguy cơ chậm
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-05', 'Xử lý nhiệm vụ khó, phức tạp, liên ngành hoặc vướng cơ chế, nguồn lực')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(5)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(5)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">6</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-06</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi phân công, phối hợp trong vận hành chính quyền 2 cấp</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Tiến độ đảm bảo</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Thường trực Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, chỉ đạo</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-28</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-06', 'Theo dõi phân công, phối hợp trong vận hành chính quyền 2 cấp')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(6)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(6)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">7</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-07</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi tiến độ giải quyết thủ tục hành chính, hồ sơ đúng hạn tại Một cửa</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Tỷ lệ đúng hạn đạt 99.4%</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">UBND xã</td>
-                        <td class="p-3 text-slate-600">Cải cách hành chính</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-30</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-07', 'Theo dõi tiến độ giải quyết thủ tục hành chính, hồ sơ đúng hạn tại Một cửa')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(7)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(7)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">8</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-08</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Cập nhật bảng theo dõi số, tiến độ nhiệm vụ phục vụ chỉ đạo</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Dữ liệu được làm sạch liên tục</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Văn phòng Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Quản trị nhiệm vụ</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-22</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-08', 'Cập nhật bảng theo dõi số, tiến độ nhiệm vụ phục vụ chỉ đạo')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(8)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(8)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">9</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-09</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi nhiệm vụ, chỉ tiêu phát triển kinh tế theo kế hoạch năm</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Các chỉ tiêu đạt 85% kế hoạch</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">UBND xã</td>
-                        <td class="p-3 text-slate-600">Phát triển kinh tế</td>
-                        <td class="p-3 font-mono text-slate-600">2026-11-15</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-09', 'Theo dõi nhiệm vụ, chỉ tiêu phát triển kinh tế theo kế hoạch năm')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(9)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(9)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">10</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-10</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi tiến độ công trình, dự án và tháo gỡ khó khăn phát sinh</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Thời tiết mưa kéo dài ảnh hưởng thi công</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">UBND xã</td>
-                        <td class="p-3 text-slate-600">Đất đai, xây dựng</td>
-                        <td class="p-3 font-mono text-slate-600">2026-10-01</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-orange-100 text-orange-800 border-orange-300">
-                                Nguy cơ chậm
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-10', 'Theo dõi tiến độ công trình, dự án và tháo gỡ khó khăn phát sinh')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(10)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(10)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">11</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-11</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi phân bổ, sử dụng và điều hành ngân sách theo nghị quyết</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Giải ngân đúng kế hoạch</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">UBND xã</td>
-                        <td class="p-3 text-slate-600">Phát triển kinh tế</td>
-                        <td class="p-3 font-mono text-slate-600">2026-12-31</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-11', 'Theo dõi phân bổ, sử dụng và điều hành ngân sách theo nghị quyết')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(11)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(11)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">12</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-12</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi xử lý hồ sơ, vụ việc đất đai tồn đọng kéo dài</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Vướng tranh chấp ranh giới chưa giải quyết xong</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">UBND xã</td>
-                        <td class="p-3 text-slate-600">Đất đai, xây dựng</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-15</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-red-100 text-red-800 border-red-300">
-                                Quá hạn
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-12', 'Theo dõi xử lý hồ sơ, vụ việc đất đai tồn đọng kéo dài')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(12)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(12)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">13</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-13</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi nhiệm vụ an sinh xã hội, đối tượng chính sách khẩn cấp</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Chi trả đúng và đủ 100%</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">UBND xã</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, điều hành</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-29</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-13', 'Theo dõi nhiệm vụ an sinh xã hội, đối tượng chính sách khẩn cấp')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(13)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(13)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">14</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-14</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi nhiệm vụ giáo dục, y tế, văn hóa, giảm nghèo bền vững</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Đang triển khai đợt rà soát hộ nghèo</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">UBND xã</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, điều hành</td>
-                        <td class="p-3 font-mono text-slate-600">2026-10-20</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-14', 'Theo dõi nhiệm vụ giáo dục, y tế, văn hóa, giảm nghèo bền vững')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(14)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(14)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">15</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-15</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi nhiệm vụ quốc phòng, an ninh và xử lý phát sinh</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Đảm bảo an toàn tuyệt đối địa bàn</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Công an, Quân sự xã</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, chỉ đạo</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-30</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-15', 'Theo dõi nhiệm vụ quốc phòng, an ninh và xử lý phát sinh')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(15)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(15)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">16</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-16</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi tuyên truyền, vận động Nhân dân hưởng ứng phong trào</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Dân hưởng ứng tích cực</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">MTTQ và đoàn thể</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, chỉ đạo</td>
-                        <td class="p-3 font-mono text-slate-600">2026-10-15</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-16', 'Theo dõi tuyên truyền, vận động Nhân dân hưởng ứng phong trào')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(16)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(16)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">17</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-17</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi kiện toàn, phân công hoạt động của các tổ chức bộ phận</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Đã kiện toàn nhân sự đủ</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, điều hành</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-25</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-17', 'Theo dõi kiện toàn, phân công hoạt động của các tổ chức bộ phận')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(17)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(17)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">18</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-18</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi sinh hoạt chi bộ, phát triển đảng viên mới</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Đã kết nạp 8/10 chỉ tiêu</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Lãnh đạo, chỉ đạo</td>
-                        <td class="p-3 font-mono text-slate-600">2026-10-30</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-18', 'Theo dõi sinh hoạt chi bộ, phát triển đảng viên mới')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(18)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(18)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">19</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-19</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Theo dõi tiếp công dân và giải quyết dứt điểm phản ánh trong 24h</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Xử lý 100% phản ánh trong ngày thứ 6</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Thường trực Đảng ủy/UBND</td>
-                        <td class="p-3 text-slate-600">Thứ 6 không giấy hẹn</td>
-                        <td class="p-3 font-mono text-slate-600">2026-09-25</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-emerald-100 text-emerald-800 border-emerald-300">
-                                Hoàn thành
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-19', 'Theo dõi tiếp công dân và giải quyết dứt điểm phản ánh trong 24h')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(19)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(19)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-3 text-center text-slate-500 font-medium">20</td>
-                        <td class="p-3 font-mono font-bold text-red-800">NV-20</td>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-800">Hoàn thiện hồ sơ minh chứng, tổ chức khảo sát và đề xuất nhân rộng</div>
-                            <div class="text-[11px] text-slate-500 mt-0.5">Ghi chú: Sẵn sàng đón Đoàn khảo sát</div>
-                        </td>
-                        <td class="p-3 font-medium text-slate-700">Văn phòng Đảng ủy</td>
-                        <td class="p-3 text-slate-600">Quản trị nhiệm vụ</td>
-                        <td class="p-3 font-mono text-slate-600">2026-10-05</td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border bg-yellow-100 text-yellow-800 border-yellow-300">
-                                Đang thực hiện
-                            </span>
-                        </td>
-                        <td class="p-3 text-center">
-                            <div class="flex justify-center items-center gap-1">
-                                <button onclick="showQR('NV-20', 'Hoàn thiện hồ sơ minh chứng, tổ chức khảo sát và đề xuất nhân rộng')" class="p-1.5 hover:bg-slate-200 rounded text-slate-600" title="Mã QR"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" aria-hidden="true" class="lucide lucide-qr-code w-4 h-4"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></button>
-                                <button onclick="editTask(20)" class="p-1.5 hover:bg-slate-200 rounded text-blue-600" title="Sửa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit" aria-hidden="true" class="lucide lucide-edit w-4 h-4"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg></button>
-                                <button onclick="deleteTask(20)" class="p-1.5 hover:bg-slate-200 rounded text-red-600" title="Xóa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
                     </table>
                 </div>
@@ -840,7 +359,7 @@
                     </button>
                     <div class="mt-3 text-[11px] text-slate-500 flex items-center justify-between">
                         <span id="meeting-count-label">Chưa có đăng ký nào tuần này</span>
-                        <button onclick="openMeetingListModal()" class="text-red-700 font-bold hover:underline">Xem danh sách</button>
+                        <button data-permission="friday" onclick="openMeetingListModal()" class="text-red-700 font-bold hover:underline">Xem danh sách</button>
                     </div>
                 </div>
 
@@ -848,20 +367,13 @@
                 <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-5">
                     <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center justify-between border-b pb-2 flex-wrap gap-2">
                         <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-text" aria-hidden="true" class="lucide lucide-file-text w-5 h-5 text-blue-600"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg> Danh Sách Hồ Sơ Xử Lý Trong 24h (Thứ Sáu Hàng Tuần)</span>
-                        <div class="flex items-center gap-2 flex-wrap">
+                        <div class="flex items-center gap-2">
                             <span class="text-xs font-normal text-emerald-700 bg-emerald-50 px-2 py-1 rounded border border-emerald-200">100% Công Khai</span>
-                            <a href="http://dvctt.camau.gov.vn" target="_blank" rel="noopener" title="Mở Cổng Dịch Vụ Công Trực Tuyến tỉnh Cà Mau để tra cứu trạng thái hồ sơ chính thức bằng mã hồ sơ" class="text-[11px] bg-slate-700 hover:bg-slate-800 text-white px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1 transition">
-                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Tra Cứu Trên Cổng DVC Cà Mau
-                            </a>
-                            <button data-permission="friday" onclick="openExcelImportModal()" class="text-[11px] bg-emerald-700 hover:bg-emerald-800 text-white px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1 transition">
-                                <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> Nhập Excel Một Cửa
-                            </button>
                             <button data-permission="friday" onclick="openFridayModal()" class="text-[11px] bg-red-700 hover:bg-red-800 text-white px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1 transition">
                                 <i data-lucide="plus" class="w-3.5 h-3.5"></i> Thêm Hồ Sơ
                             </button>
                         </div>
                     </h3>
-                    <p class="text-[11px] text-slate-500 mb-2 -mt-1">Tra cứu trạng thái chính thức: nhắn Zalo OA "Dịch vụ công trực tuyến tỉnh Cà Mau" theo cú pháp <b>#Mã hồ sơ</b>, hoặc quét mã QR trên phiếu tiếp nhận.</p>
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs text-left">
                             <thead>
@@ -973,7 +485,7 @@
                     </div>
                     <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg">
                         <div class="font-bold text-amber-900 text-xs mb-1">Điểm 2: Bảng số</div>
-                        <p class="text-[11px] text-slate-700">Trực tiếp xem bảng theo dõi số 20 nhiệm vụ trọng điểm &amp; mã màu phân loại.</p>
+                        <p class="text-[11px] text-slate-700">Trực tiếp xem bảng theo dõi số 42 nhiệm vụ trọng điểm &amp; mã màu phân loại.</p>
                     </div>
                     <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
                         <div class="font-bold text-blue-900 text-xs mb-1">Điểm 3: Kiểm chứng</div>
@@ -1072,15 +584,11 @@
                         <input type="text" id="modal-code" placeholder="NV-01" required="" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
                     </div>
                     <div>
-                        <label class="block font-bold text-slate-700 mb-1">Lĩnh Vực *</label>
+                        <label class="block font-bold text-slate-700 mb-1">Tháng Thực Hiện *</label>
                         <select id="modal-category" required="" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
-                            <option value="Lãnh đạo, chỉ đạo">Lãnh đạo, chỉ đạo</option>
-                            <option value="Lãnh đạo, điều hành">Lãnh đạo, điều hành</option>
-                            <option value="Quản trị nhiệm vụ">Quản trị nhiệm vụ</option>
-                            <option value="Cải cách hành chính">Cải cách hành chính</option>
-                            <option value="Phát triển kinh tế">Phát triển kinh tế</option>
-                            <option value="Đất đai, xây dựng">Đất đai, xây dựng</option>
-                            <option value="Thứ 6 không giấy hẹn">Thứ 6 không giấy hẹn</option>
+                            <option value="Tháng 10/2026">Tháng 10/2026</option>
+                            <option value="Tháng 11/2026">Tháng 11/2026</option>
+                            <option value="Tháng 12/2026">Tháng 12/2026</option>
                         </select>
                     </div>
                 </div>
@@ -1113,6 +621,16 @@
                         </select>
                     </div>
                 </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">% Tiến Độ Thực Hiện *</label>
+                        <input type="number" id="modal-progress" min="0" max="100" step="5" value="0" required="" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Kết Quả Đã Thực Hiện</label>
+                    <textarea id="modal-result" rows="2" placeholder="Mô tả cụ thể kết quả, sản phẩm đã hoàn thành đến thời điểm báo cáo..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none"></textarea>
+                </div>
                 <div>
                     <label class="block font-bold text-slate-700 mb-1">Điểm Nghẽn / Khó Khăn &amp; Chỉ Đạo Tháo Gỡ (Nếu có)</label>
                     <textarea id="modal-note" rows="2" placeholder="Ghi nhận vướng mắc và nội dung chỉ đạo tháo gỡ của Thường trực..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none"></textarea>
@@ -1143,49 +661,6 @@
     </div>
 
     <!-- Modal Thêm / Sửa Hồ Sơ Thứ 6 -->
-    <!-- Modal Nhập Hồ Sơ Từ File Excel/CSV Xuất Từ Hệ Thống Một Cửa Điện Tử -->
-    <div id="excel-import-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-3xl overflow-hidden border border-slate-200 max-h-[90vh] flex flex-col">
-            <div class="bg-red-800 text-white p-4 flex justify-between items-center shrink-0">
-                <h3 class="font-bold text-sm flex items-center gap-2"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Nhập Hồ Sơ Từ Excel (Hệ Thống Một Cửa Điện Tử)</h3>
-                <button onclick="closeExcelImportModal()" class="text-slate-200 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-            </div>
-            <div class="p-4 overflow-y-auto text-xs">
-                <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg mb-3 text-amber-800 leading-relaxed">
-                    <b>Cách lấy file:</b> Trong phần mềm Một cửa điện tử tỉnh (dvctt.camau.gov.vn), vào mục <i>Danh sách hồ sơ tiếp nhận</i> → chọn khoảng ngày (VD: Thứ 6 tuần này) → bấm <b>Xuất Excel</b>. Sau đó tải file đó lên đây — hệ thống sẽ tự nhận diện cột và nhập vào bảng theo dõi, không cần gõ lại tay.
-                </div>
-                <div id="excel-step-upload">
-                    <label class="flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:bg-slate-50">
-                        <i data-lucide="upload-cloud" class="w-8 h-8 text-slate-400"></i>
-                        <span class="font-medium text-slate-600">Chọn file Excel/CSV đã xuất (.xlsx, .xls, .csv)</span>
-                        <input type="file" id="excel-file-input" accept=".xlsx,.xls,.csv" onchange="handleExcelFile(event)" class="hidden">
-                    </label>
-                </div>
-                <div id="excel-step-mapping" class="hidden">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="font-bold text-slate-700">Đối chiếu cột dữ liệu (hệ thống đã tự đoán, kiểm tra lại nếu cần)</div>
-                        <span id="excel-row-count" class="text-slate-500"></span>
-                    </div>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-3" id="excel-mapping-fields"></div>
-                    <div class="font-bold text-slate-700 mb-1">Xem trước (tối đa 5 dòng đầu):</div>
-                    <div class="overflow-x-auto border border-slate-200 rounded-lg">
-                        <table class="w-full text-[11px] text-left">
-                            <thead id="excel-preview-head" class="bg-slate-100 font-bold text-slate-700"></thead>
-                            <tbody id="excel-preview-body" class="divide-y divide-slate-100"></tbody>
-                        </table>
-                    </div>
-                    <div class="pt-3 flex justify-between gap-2 border-t mt-3">
-                        <button type="button" onclick="resetExcelImport()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded font-medium text-slate-600">Chọn File Khác</button>
-                        <div class="flex gap-2">
-                            <button type="button" onclick="closeExcelImportModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded font-medium">Hủy</button>
-                            <button type="button" onclick="confirmExcelImport()" class="px-4 py-2 bg-red-800 hover:bg-red-900 text-white font-bold rounded shadow">Xác Nhận Nhập <span id="excel-confirm-count"></span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="friday-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden border border-slate-200">
             <div class="bg-red-800 text-white p-4 flex justify-between items-center">
@@ -1210,7 +685,7 @@
                 </div>
                 <div>
                     <label class="font-medium text-slate-600 block mb-1">Đơn vị phụ trách xử lý</label>
-                    <select id="friday-dept" required onchange="handleDeptSelectChange(this)" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none"></select>
+                    <select id="friday-dept" required class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-red-600 outline-none"></select>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -1374,7 +849,7 @@
                     <div class="font-bold text-slate-700 mb-1">Chú thích vai trò &amp; quyền thao tác:</div>
                     <ul class="space-y-0.5 text-slate-600">
                         <li><b>admin</b> — Quản trị viên: toàn quyền trên mọi phân hệ.</li>
-                        <li><b>van_phong</b> — Văn phòng Đảng ủy: quản lý 20 Nhiệm vụ trọng điểm và Chỉ tiêu Dashboard.</li>
+                        <li><b>van_phong</b> — Văn phòng Đảng ủy: quản lý 42 Nhiệm vụ trọng điểm và Chỉ tiêu Dashboard.</li>
                         <li><b>mot_cua</b> — Bộ phận Một cửa: quản lý hồ sơ &amp; đăng ký "Thứ 6 không giấy hẹn".</li>
                         <li><b>kiem_tra</b> — Tổ rà soát: cập nhật rà soát "3 Kiểm".</li>
                         <li><b>khao_sat</b> — Tổ chuẩn bị khảo sát: quản lý hồ sơ minh chứng, checklist, đánh giá mô hình.</li>
@@ -1440,17 +915,21 @@
                         <pre class="text-[10px] bg-slate-900 text-emerald-300 p-2 rounded overflow-x-auto">rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function role() {
+      return get(/databases/$(database)/documents/hoabinh_users/$(request.auth.uid)).data.role;
+    }
     match /hoabinh_system/{docId} {
-      allow read: if true;
-      allow write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && role() in ['admin','van_phong','mot_cua','kiem_tra','khao_sat'];
     }
     match /hoabinh_users/{uid} {
       allow read: if request.auth != null;
-      allow create: if request.auth != null && request.auth.uid == uid;
-      allow update: if request.auth != null && (
-        request.auth.uid == uid ||
-        get(/databases/$(database)/documents/hoabinh_users/$(request.auth.uid)).data.role == 'admin'
-      );
+      // Tự đăng ký chỉ được ở quyền "viewer"
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.role == 'viewer';
+      // Chỉ admin được đổi vai trò; người dùng không tự nâng quyền
+      allow update: if request.auth != null && role() == 'admin';
     }
   }
 }</pre>
@@ -1493,29 +972,51 @@ service cloud.firestore {
     <!-- JavaScript Application Logic -->
     <script>
         // ============================================================
-        // 20 Nhiệm vụ mẫu gốc (Phụ Lục 01)
+        // 42 Nhiệm vụ trọng tâm Tháng 10, 11, 12/2026 (Phụ lục kèm theo Chương trình công tác của Đảng ủy)
         // ============================================================
         const initialTasks = [
-            { id: 1, code: 'NV-01', category: 'Lãnh đạo, chỉ đạo', title: 'Rà soát, cụ thể hóa và theo dõi thực hiện nghị quyết, kết luận của Đảng ủy', assignee: 'Thường trực Đảng ủy', partner: 'Văn phòng, UBND, MTTQ', dueDate: '2026-09-30', status: 'Hoàn thành', note: 'Đã ban hành chương trình hành động đầy đủ' },
-            { id: 2, code: 'NV-02', category: 'Lãnh đạo, điều hành', title: 'Tổng hợp nhiệm vụ sau các cuộc họp để giao rõ việc, rõ người, rõ tiến độ', assignee: 'Văn phòng Đảng ủy', partner: 'Các bộ phận liên quan', dueDate: '2026-09-25', status: 'Hoàn thành', note: 'Đã ban hành thông báo kết luận ngay sau họp' },
-            { id: 3, code: 'NV-03', category: 'Quản trị nhiệm vụ', title: 'Thiết lập và cập nhật bảng theo dõi 20 nhiệm vụ trọng điểm', assignee: 'Văn phòng Đảng ủy', partner: 'Các đơn vị chủ trì', dueDate: '2026-09-20', status: 'Hoàn thành', note: 'Bảng số hoạt động liên tục' },
-            { id: 4, code: 'NV-04', category: 'Lãnh đạo, chỉ đạo', title: 'Rà soát nhiệm vụ sắp đến hạn, nguy cơ chậm và quá hạn để xử lý', assignee: 'Thường trực Đảng ủy', partner: 'Các đơn vị liên quan', dueDate: '2026-10-05', status: 'Đang thực hiện', note: 'Rà soát định kỳ thứ 5 hàng tuần' },
-            { id: 5, code: 'NV-05', category: 'Lãnh đạo, điều hành', title: 'Xử lý nhiệm vụ khó, phức tạp, liên ngành hoặc vướng cơ chế, nguồn lực', assignee: 'Thường trực Đảng ủy', partner: 'UBND, MTTQ, Đoàn thể', dueDate: '2026-10-10', status: 'Nguy cơ chậm', note: 'Đang vướng cơ chế giải phóng mặt bằng, chờ họp chỉ đạo' },
-            { id: 6, code: 'NV-06', category: 'Lãnh đạo, chỉ đạo', title: 'Theo dõi phân công, phối hợp trong vận hành chính quyền 2 cấp', assignee: 'Thường trực Đảng ủy', partner: 'UBND xã', dueDate: '2026-09-28', status: 'Đang thực hiện', note: 'Tiến độ đảm bảo' },
-            { id: 7, code: 'NV-07', category: 'Cải cách hành chính', title: 'Theo dõi tiến độ giải quyết thủ tục hành chính, hồ sơ đúng hạn tại Một cửa', assignee: 'UBND xã', partner: 'Bộ phận Một cửa', dueDate: '2026-09-30', status: 'Hoàn thành', note: 'Tỷ lệ đúng hạn đạt 99.4%' },
-            { id: 8, code: 'NV-08', category: 'Quản trị nhiệm vụ', title: 'Cập nhật bảng theo dõi số, tiến độ nhiệm vụ phục vụ chỉ đạo', assignee: 'Văn phòng Đảng ủy', partner: 'Cán bộ phụ trách CĐS', dueDate: '2026-09-22', status: 'Hoàn thành', note: 'Dữ liệu được làm sạch liên tục' },
-            { id: 9, code: 'NV-09', category: 'Phát triển kinh tế', title: 'Theo dõi nhiệm vụ, chỉ tiêu phát triển kinh tế theo kế hoạch năm', assignee: 'UBND xã', partner: 'Bộ phận chuyên môn', dueDate: '2026-11-15', status: 'Đang thực hiện', note: 'Các chỉ tiêu đạt 85% kế hoạch' },
-            { id: 10, code: 'NV-10', category: 'Đất đai, xây dựng', title: 'Theo dõi tiến độ công trình, dự án và tháo gỡ khó khăn phát sinh', assignee: 'UBND xã', partner: 'Bộ phận chuyên môn', dueDate: '2026-10-01', status: 'Nguy cơ chậm', note: 'Thời tiết mưa kéo dài ảnh hưởng thi công' },
-            { id: 11, code: 'NV-11', category: 'Phát triển kinh tế', title: 'Theo dõi phân bổ, sử dụng và điều hành ngân sách theo nghị quyết', assignee: 'UBND xã', partner: 'Bộ phận tài chính', dueDate: '2026-12-31', status: 'Đang thực hiện', note: 'Giải ngân đúng kế hoạch' },
-            { id: 12, code: 'NV-12', category: 'Đất đai, xây dựng', title: 'Theo dõi xử lý hồ sơ, vụ việc đất đai tồn đọng kéo dài', assignee: 'UBND xã', partner: 'Địa chính, Tư pháp', dueDate: '2026-09-15', status: 'Quá hạn', note: 'Vướng tranh chấp ranh giới chưa giải quyết xong' },
-            { id: 13, code: 'NV-13', category: 'Lãnh đạo, điều hành', title: 'Theo dõi nhiệm vụ an sinh xã hội, đối tượng chính sách khẩn cấp', assignee: 'UBND xã', partner: 'MTTQ, Đoàn thể', dueDate: '2026-09-29', status: 'Hoàn thành', note: 'Chi trả đúng và đủ 100%' },
-            { id: 14, code: 'NV-14', category: 'Lãnh đạo, điều hành', title: 'Theo dõi nhiệm vụ giáo dục, y tế, văn hóa, giảm nghèo bền vững', assignee: 'UBND xã', partner: 'Các bộ phận liên quan', dueDate: '2026-10-20', status: 'Đang thực hiện', note: 'Đang triển khai đợt rà soát hộ nghèo' },
-            { id: 15, code: 'NV-15', category: 'Lãnh đạo, chỉ đạo', title: 'Theo dõi nhiệm vụ quốc phòng, an ninh và xử lý phát sinh', assignee: 'Công an, Quân sự xã', partner: 'Các đơn vị liên quan', dueDate: '2026-09-30', status: 'Hoàn thành', note: 'Đảm bảo an toàn tuyệt đối địa bàn' },
-            { id: 16, category: 'Lãnh đạo, chỉ đạo', code: 'NV-16', title: 'Theo dõi tuyên truyền, vận động Nhân dân hưởng ứng phong trào', assignee: 'MTTQ và đoàn thể', partner: 'Đảng ủy, UBND', dueDate: '2026-10-15', status: 'Đang thực hiện', note: 'Dân hưởng ứng tích cực' },
-            { id: 17, category: 'Lãnh đạo, điều hành', code: 'NV-17', title: 'Theo dõi kiện toàn, phân công hoạt động của các tổ chức bộ phận', assignee: 'Đảng ủy', partner: 'UBND, MTTQ', dueDate: '2026-09-25', status: 'Hoàn thành', note: 'Đã kiện toàn nhân sự đủ' },
-            { id: 18, category: 'Lãnh đạo, chỉ đạo', code: 'NV-18', title: 'Theo dõi sinh hoạt chi bộ, phát triển đảng viên mới', assignee: 'Đảng ủy', partner: 'Các chi bộ trực thuộc', dueDate: '2026-10-30', status: 'Đang thực hiện', note: 'Đã kết nạp 8/10 chỉ tiêu' },
-            { id: 19, category: 'Thứ 6 không giấy hẹn', code: 'NV-19', title: 'Theo dõi tiếp công dân và giải quyết dứt điểm phản ánh trong 24h', assignee: 'Thường trực Đảng ủy/UBND', partner: '5 Lực lượng phối hợp', dueDate: '2026-09-25', status: 'Hoàn thành', note: 'Xử lý 100% phản ánh trong ngày thứ 6' },
-            { id: 20, category: 'Quản trị nhiệm vụ', code: 'NV-20', title: 'Hoàn thiện hồ sơ minh chứng, tổ chức khảo sát và đề xuất nhân rộng', assignee: 'Văn phòng Đảng ủy', partner: 'Các đơn vị liên quan', dueDate: '2026-10-05', status: 'Đang thực hiện', note: 'Sẵn sàng đón Đoàn khảo sát' }
+            { id: 1, code: 'NV-01', category: 'Tháng 10/2026', title: 'Dự thảo Kế hoạch của Ban Thường vụ Đảng ủy xã khắc phục hạn chế, khuyết điểm trong việc lãnh đạo, chỉ đạo và tổ chức thực hiện các quy định của Bộ Chính trị về kiểm soát quyền lực và phòng, chống tham nhũng, tiêu cực (Sau khi Ban Thường vụ Tỉnh ủy ban hành Kết luận)', assignee: 'Văn phòng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Ban hành Kế hoạch đảm bảo chất lượng, hiệu quả, phù hợp với tình hình thực tế. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 2, code: 'NV-02', category: 'Tháng 10/2026', title: 'Dự thảo Kế hoạch của Ban Thường vụ Đảng ủy xã khắc phục hạn chế, khuyết điểm trong việc lãnh đạo, chỉ đạo và tổ chức thực hiện Nghị quyết số 57-NQ/TW, ngày 22/12/2024 của Bộ Chính trị về đột phá phát triển khoa học,công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia (Sau khi Ban Thường vụ Tỉnh ủy ban hành Kết luận)', assignee: 'Văn phòng Đảng ủy', partner: 'Các cơ quan, phòng, ban, Mặt trận Tổ quốc, đoàn thể chính trị - xã hội xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Ban hành Kế hoạch đảm bảo chất lượng, hiệu quả, phù hợp với tình hình thực tế. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 3, code: 'NV-03', category: 'Tháng 10/2026', title: 'Sửa đổi, bổ sung dự thảo Quy chế làm việc của Ban Chấp hành Đảng bộ xã, Ban Thường vụ Đảng ủy và Thường trực Đảng ủy xã khóa I, nhiệm kỳ 2025 - 2030', assignee: 'Văn phòng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Sửa đổi Quy chế làm việc đảm bảo đúng quy định. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 4, code: 'NV-04', category: 'Tháng 10/2026', title: 'Triển khai thủ tục thu hồi dấu cũ, cấp đổi dấu mới đối với các tổ chức đảng sau khi đổi tên, giải thế, sắp xếp, thành lập mới', assignee: 'Văn phòng Đảng ủy', partner: 'Ban Xây dựng Đảng Đảng ủy, các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện kịp thời, đúng quy định. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 5, code: 'NV-05', category: 'Tháng 10/2026', title: 'Sắp xếp, kiện toàn các chức danh cấp ủy, cán bộ lãnh đạo, quản lý các cơ quan, phòng, ban cấp xã', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; Ban Thường vụ Đảng ủy Ủy ban nhân dân xã chỉ đạo Ủy ban nhân dân xã; Ủy ban MTTQ, các đoàn thể chính trị - xã hội xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện thường xuyên; đảm bảo kiện toàn kịp thời, đầy đủ, đúng quy định. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 6, code: 'NV-06', category: 'Tháng 10/2026', title: 'Đẩy mạnh công tác phát triển đảng viên', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Kết nạp từ 05 đảng viên trở lên. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 7, code: 'NV-07', category: 'Tháng 10/2026', title: 'Kiện toàn, nâng cao chất lượng hoạt động của các tổ chức đảng sau sắp xếp, thành lập mới', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ sau sắp xếp, thành lập mới', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Chỉ đạo các tổ chức đảng ban hành Quy chế làm việc, chương trình công tác và các văn bản có liên quan công tác tổ chức, xây dựng Đảng; đồng thời, củng cố tổ chức bộ máy đảm bảo hoạt động thông suốt, hiệu quả. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 8, code: 'NV-08', category: 'Tháng 10/2026', title: 'Thực hiện số hóa hồ sơ đảng viên', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đảm bảo tiến độ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 9, code: 'NV-09', category: 'Tháng 10/2026', title: 'Tổ chức giám sát việc thực hiện quy chế làm việc, nhiệm kỳ 2025 - 2030 và xây dựng đoàn kết nội bộ đối với Chi bộ Cơ quan Ủy ban Mặt trận Tổ quốc Việt Nam xã', assignee: 'Ủy ban Kiểm tra Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; Chi bộ Cơ quan Ủy ban Mặt trận Tổ quốc Việt Nam xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đảm bảo theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 10, code: 'NV-10', category: 'Tháng 10/2026', title: 'Tổ chức các cuộc kiểm tra, giám sát của Đảng ủy, Ủy ban Kiểm tra Đảng ủy', assignee: 'Ủy ban Kiểm tra Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ được kiểm tra, giám sát', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đảm bảo theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 11, code: 'NV-11', category: 'Tháng 10/2026', title: 'Tổ chức các lớp bồi dưỡng lý luận chính trị', assignee: 'Trung tâm Chính trị xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đảm bảo theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 12, code: 'NV-12', category: 'Tháng 10/2026', title: 'Tiếp tục thực hiện các mô hình “Café dân sinh”, “Bàn tròn Mặt trận”', assignee: 'Ủy ban Mặt trận Tổ quốc Việt Nam xã', partner: 'Các cơ quan, phòng, ban cấp xã; các đảng bộ, chi bộ trực thuộc Đảng ủy', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện kịp thời, có hiệu quả. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 13, code: 'NV-13', category: 'Tháng 10/2026', title: 'Ra mắt diễn đàn “Lắng nghe dân nói”', assignee: 'Ủy ban Mặt trận Tổ quốc Việt Nam xã', partner: 'Các cơ quan, phòng, ban cấp xã; các đảng bộ, chi bộ trực thuộc Đảng ủy', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 14, code: 'NV-14', category: 'Tháng 10/2026', title: 'Triển khai Đề án thành lập Phòng Tài chính thuộc Ủy ban nhân dân xã và bổ sung thêm 01 Phó Chủ tịch Ủy ban nhân dân xã', assignee: 'Ban Thường vụ Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã chỉ đạo Phòng Văn hóa - Xã hội', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy, Hội đồng nhân dân xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện hoàn thành đảm bảo tiến độ, đúng theo quy định. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Đảng ủy, Chủ tịch Ủy ban nhân dân xã.' },
+            { id: 15, code: 'NV-15', category: 'Tháng 10/2026', title: 'Triển khai các giải pháp phát triển kinh tế - xã hội trên địa bàn xã', assignee: 'Ban Thường vụ Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã chỉ đạo các cơ quan, ban, ngành trực thuộc Ủy ban nhân dân xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy, Hội đồng nhân dân xã, các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đồng bộ các giải pháp, đảm bảo hoàn thành các chỉ tiêu, nhiệm vụ theo tiến độ đề ra, tập trung vào các chỉ tiêu đang đạt thấp. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Đảng ủy, Chủ tịch Ủy ban nhân dân xã.' },
+            { id: 16, code: 'NV-16', category: 'Tháng 10/2026', title: 'Tổ chức tiếp xúc cử tri trước và sau kỳ họp HĐND', assignee: 'Hội đồng nhân dân xã', partner: 'Ban Thường vụ Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã; các cơ quan tham mưu, giúp việc của Đảng; Ủy ban Mặt trận Tổ quốc Việt Nam xã', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đúng mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Bí thư Đảng ủy, Chủ tịch HĐND xã.' },
+            { id: 17, code: 'NV-17', category: 'Tháng 10/2026', title: 'Tổ chức giám sát của Hội đồng nhân dân xã', assignee: 'Hội đồng nhân dân xã', partner: 'Các cơ quan, đơn vị được giám sát', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành toàn bộ các nhiệm vụ, chỉ tiêu theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Bí thư Đảng ủy, Chủ tịch Hội đồng nhân dân xã.' },
+            { id: 18, code: 'NV-18', category: 'Tháng 10/2026', title: 'Tiếp tục thực hiện các bước tuyển chọn, gọi công dân nhập ngũ năm 2026', assignee: 'Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã chỉ đạo Ban Chỉ huy Quân sự xã', partner: 'Các cơ quan, phòng, ban, Mặt trận Tổ quốc, đoàn thể chính trị - xã hội xã và các chi bộ ấp', dueDate: '2026-10-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đúng mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Đảng ủy, Chủ tịch Ủy ban nhân dân xã.' },
+            { id: 19, code: 'NV-19', category: 'Tháng 11/2026', title: 'Sắp xếp, kiện toàn các chức danh cấp ủy, cán bộ lãnh đạo, quản lý các cơ quan, phòng, ban cấp xã', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; Ban Thường vụ Đảng ủy Ủy ban nhân dân xã chỉ đạo Ủy ban nhân dân xã; Ủy ban MTTQ, các đoàn thể chính trị - xã hội xã', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện thường xuyên; đảm bảo kiện toàn kịp thời, đầy đủ, đúng quy định. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 20, code: 'NV-20', category: 'Tháng 11/2026', title: 'Đẩy mạnh công tác phát triển đảng viên', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Kết nạp từ 05 đảng viên trở lên. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 21, code: 'NV-21', category: 'Tháng 11/2026', title: 'Tổ chức Lễ trao Huy hiệu Đảng đợt 07/11/2026', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Tổ chức trang trọng, thiết thực, có ý nghĩa. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 22, code: 'NV-22', category: 'Tháng 11/2026', title: 'Thực hiện số hóa hồ sơ đảng viên', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đảm bảo tiến độ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 23, code: 'NV-23', category: 'Tháng 11/2026', title: 'Tổ chức các cuộc kiểm tra, giám sát của Đảng ủy, Ủy ban Kiểm tra Đảng ủy', assignee: 'Ủy ban Kiểm tra Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ được kiểm tra, giám sát', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đảm bảo theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 24, code: 'NV-24', category: 'Tháng 11/2026', title: 'Tổ chức các lớp bồi dưỡng lý luận chính trị', assignee: 'Trung tâm Chính trị xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành toàn bộ các nhiệm vụ, chỉ tiêu theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy.' },
+            { id: 25, code: 'NV-25', category: 'Tháng 11/2026', title: 'Triển khai các giải pháp phát triển kinh tế - xã hội trên địa bàn xã', assignee: 'Ban Thường vụ Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã chỉ đạo các cơ quan, ban, ngành trực thuộc Ủy ban nhân dân xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy, Hội đồng nhân dân xã, các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đồng bộ các giải pháp, đảm bảo hoàn thành các chỉ tiêu, nhiệm vụ theo tiến độ đề ra, tập trung vào các chỉ tiêu đang đạt thấp. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Đảng ủy, Chủ tịch Ủy ban nhân dân xã.' },
+            { id: 26, code: 'NV-26', category: 'Tháng 11/2026', title: 'Tổ chức ngày Hội toàn dân đoàn kết toàn dân tộc khu dân cư nhân kỷ niệm 96 năm Ngày thành lập Mặt trận dân tộc thống nhất Việt Nam - Ngày truyền thống Mặt trận Tổ quốc Việt Nam (18/11/1930 - 18/11/2026)', assignee: 'Ủy ban Mặt trận Tổ quốc Việt Nam xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các chi bộ ấp', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện các hoạt động thiết thực, có ý nghĩa. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 27, code: 'NV-27', category: 'Tháng 11/2026', title: 'Ra mắt mô hình “Khu dân cư đoàn kết, ấm no, hạnh phúc”', assignee: 'Ủy ban Mặt trận Tổ quốc Việt Nam xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các chi bộ ấp', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 28, code: 'NV-28', category: 'Tháng 11/2026', title: 'Tổ chức giám sát của Hội đồng nhân dân xã', assignee: 'Hội đồng nhân dân xã', partner: 'Các cơ quan, đơn vị được giám sát', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành toàn bộ các nhiệm vụ, chỉ tiêu theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Bí thư Đảng ủy, Chủ tịch Hội đồng nhân dân xã.' },
+            { id: 29, code: 'NV-29', category: 'Tháng 11/2026', title: 'Tiếp tục thực hiện các bước tuyển chọn, gọi công dân nhập ngũ năm 2026', assignee: 'Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã chỉ đạo Ban Chỉ huy Quân sự xã', partner: 'Các cơ quan, phòng, ban, Mặt trận Tổ quốc, đoàn thể chính trị - xã hội xã và các chi bộ ấp', dueDate: '2026-11-30', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đúng mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Đảng ủy, Chủ tịch Ủy ban nhân dân xã.' },
+            { id: 30, code: 'NV-30', category: 'Tháng 12/2026', title: 'Tổ chức Hội nghị Đảng ủy xã tổng kết các mặt công tác năm 2026, triển khai phương hướng, nhiệm vụ năm 2027', assignee: 'Văn phòng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các cơ quan, phòng, ban, Mặt trận Tổ quốc, đoàn thể chính trị - xã hội xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành công tác chuẩn bị chặt chẽ, khoa học, có chất lượng. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 31, code: 'NV-31', category: 'Tháng 12/2026', title: 'Sắp xếp, kiện toàn các chức danh cấp ủy, cán bộ lãnh đạo, quản lý các cơ quan, phòng, ban cấp xã', assignee: 'Ban Xây dựng Đảng Đảng ủy', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; Ban Thường vụ Đảng ủy Ủy ban nhân dân xã chỉ đạo Ủy ban nhân dân xã; Ủy ban MTTQ, các đoàn thể chính trị - xã hội xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện thường xuyên; đảm bảo kiện toàn kịp thời, đầy đủ, đúng quy định. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 32, code: 'NV-32', category: 'Tháng 12/2026', title: 'Hoàn thành chỉ tiêu kết nạp đảng viên mới', assignee: 'Ban Xây dựng Đảng Đảng ủy xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Kết nạp từ 05 đảng viên trở lên; hoàn thành chỉ tiêu 15 đảng viên. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 33, code: 'NV-33', category: 'Tháng 12/2026', title: 'Tổ chức kiểm điểm, đánh giá, xếp loại tập thể, cá nhân năm 2026', assignee: 'Ban Xây dựng Đảng Đảng ủy xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các cơ quan, phòng, ban, Mặt trận Tổ quốc, đoàn thể chính trị - xã hội xã; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 34, code: 'NV-34', category: 'Tháng 12/2026', title: 'Ban hành Kế hoạch bồi dưỡng chính trị năm 2026', assignee: 'Ban Xây dựng Đảng Đảng ủy xã', partner: 'Trung tâm Chính trị xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện kịp thời, đúng quy định. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 35, code: 'NV-35', category: 'Tháng 12/2026', title: 'Xét chọn đối tượng, tổ chức tuyên dương các tập thể, cá nhân có thành tích tiêu biểu trong học tập và làm theo Bác', assignee: 'Ban Xây dựng Đảng Đảng ủy xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 36, code: 'NV-36', category: 'Tháng 12/2026', title: 'Tham mưu ban hành Chương trình kiểm tra, giám sát của Đảng ủy xã, Ban Thường vụ Đảng ủy xã năm 2027', assignee: 'Ủy ban Kiểm tra Đảng ủy xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các cơ quan, phòng, ban, Mặt trận Tổ quốc, đoàn thể chính trị - xã hội xã; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 37, code: 'NV-37', category: 'Tháng 12/2026', title: 'Thực hiện hoàn thành các cuộc kiểm tra, giám sát của Đảng ủy, Ủy ban Kiểm tra Đảng ủy xã', assignee: 'Ủy ban Kiểm tra Đảng ủy xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các cấp ủy, tổ chức đảng được kiểm tra, giám sát', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 38, code: 'NV-38', category: 'Tháng 12/2026', title: 'Tổng kết năm dân vận khéo 2026, triển khai mô hình “Năm Dân vận khéo” năm 2027', assignee: 'Ủy ban Mặt trận Tổ quốc Việt Nam xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện theo Kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy xã.' },
+            { id: 39, code: 'NV-39', category: 'Tháng 12/2026', title: 'Tổ chức các lớp bồi dưỡng lý luận chính trị', assignee: 'Trung tâm Chính trị xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy; các đảng bộ, chi bộ trực thuộc Đảng ủy', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Hoàn thành toàn bộ các nhiệm vụ, chỉ tiêu theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Thường trực Đảng ủy.' },
+            { id: 40, code: 'NV-40', category: 'Tháng 12/2026', title: 'Triển khai các giải pháp phát triển kinh tế - xã hội trên địa bàn xã', assignee: 'Ban Thường vụ Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã chỉ đạo các cơ quan, ban, ngành trực thuộc Ủy ban nhân dân xã', partner: 'Các cơ quan tham mưu, giúp việc của Đảng ủy, Hội đồng nhân dân xã, các đảng bộ, chi bộ trực thuộc Đảng ủy xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đồng bộ các giải pháp, đảm bảo hoàn thành các chỉ tiêu, nhiệm vụ theo tiến độ đề ra, tập trung vào các chỉ tiêu đang đạt thấp. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Đảng ủy, Chủ tịch Ủy ban nhân dân xã.' },
+            { id: 41, code: 'NV-41', category: 'Tháng 12/2026', title: 'Tổ chức kỳ họp Hội đồng nhân dân xã cuối năm 2026 giải quyết một số công việc thuộc thẩm quyền', assignee: 'Hội đồng nhân dân xã', partner: 'Ban Thường vụ Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã; các cơ quan tham mưu, giúp việc của Đảng; Ủy ban Mặt trận Tổ quốc Việt Nam xã', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đúng mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Bí thư Đảng ủy, Chủ tịch HĐND xã.' },
+            { id: 42, code: 'NV-42', category: 'Tháng 12/2026', title: 'Tiếp tục thực hiện các bước tuyển chọn, gọi công dân nhập ngũ năm 2026', assignee: 'Đảng ủy Ủy ban nhân dân xã lãnh đạo Ủy ban nhân dân xã chỉ đạo Ban Chỉ huy Quân sự xã', partner: 'Các cơ quan, phòng, ban, Mặt trận Tổ quốc, đoàn thể chính trị - xã hội xã và các chi bộ ấp', dueDate: '2026-12-31', status: 'Đang thực hiện', progress: 0, result: '', note: 'Mục tiêu: Thực hiện đúng mục tiêu, nhiệm vụ theo kế hoạch. Lãnh đạo theo dõi, chỉ đạo: Phó Bí thư Đảng ủy, Chủ tịch Ủy ban nhân dân xã.' }
         ];
 
         // Dữ liệu khởi tạo cho các module còn lại của hệ thống
@@ -1527,14 +1028,14 @@ service cloud.firestore {
 
         const initialChecklist = [
             { id: 1, text: 'Phiếu đăng ký đã thống nhất tên mô hình, đơn vị và lĩnh vực', checked: true },
-            { id: 2, text: 'Bảng 20 nhiệm vụ đã đối chiếu với văn bản giao việc thực tế', checked: true },
+            { id: 2, text: 'Bảng 42 nhiệm vụ đã đối chiếu với văn bản giao việc thực tế', checked: true },
             { id: 3, text: 'Có ít nhất 01 nhiệm vụ đủ hồ sơ minh chứng trọn gói', checked: true },
             { id: 4, text: 'Đã bố trí 05 điểm tham quan và cán bộ đầu mối đón tiếp', checked: true }
         ];
 
         const initialDocuments = [
             { id: 1, text: '01. Hồ sơ đăng ký mô hình (Phiếu, quy trình)', status: 'Đã chuẩn bị' },
-            { id: 2, text: '02. Bảng theo dõi 20 nhiệm vụ trọng điểm', status: 'Đã cập nhật số' },
+            { id: 2, text: '02. Bảng theo dõi 42 nhiệm vụ trọng điểm', status: 'Đã cập nhật số' },
             { id: 3, text: '03. Phiếu giao nhiệm vụ (Có sản phẩm cụ thể)', status: 'Đã lưu file' },
             { id: 4, text: '04. Báo cáo rà soát định kỳ 3 kiểm', status: 'Đã hoàn thiện' },
             { id: 5, text: '05. Hồ sơ tháo gỡ điểm nghẽn (Văn bản chỉ đạo)', status: 'Đã sẵn sàng' }
@@ -1577,22 +1078,7 @@ service cloud.firestore {
         // ============================================================
         // TRẠNG THÁI DÙNG CHUNG CỦA TOÀN HỆ THỐNG (1 khối lưu localStorage)
         // ============================================================
-        const STORAGE_KEY = 'hoabinh_app_state_v3';
-
-        // Danh sách đơn vị/bộ phận phụ trách xử lý hồ sơ Thứ 6 (có thể bổ sung thêm trong lúc dùng)
-        const initialDepartments = [
-            'Bộ phận Một cửa - Tư pháp, Hộ tịch',
-            'Bộ phận Một cửa - Công an xã',
-            'Bộ phận Một cửa - Địa chính, Xây dựng, Nông nghiệp, Môi trường',
-            'Bộ phận Một cửa - Lao động, Thương binh, Xã hội',
-            'UBND xã (Địa chính)',
-            'UBND xã (Tài chính - Kế toán)',
-            'UBND xã (Kinh tế)',
-            'UBND + MTTQ xã',
-            'Văn phòng HĐND - UBND xã',
-            'Công an xã',
-            'MTTQ và các đoàn thể'
-        ];
+        const STORAGE_KEY = 'hoabinh_app_state_v4';
 
         function defaultState() {
             return {
@@ -1604,8 +1090,7 @@ service cloud.firestore {
                 commitments: JSON.parse(JSON.stringify(initialCommitments)),
                 auditNotes: {},
                 evaluation: JSON.parse(JSON.stringify(initialEvaluation)),
-                unitChecks: initialUnitChecks(),
-                departments: JSON.parse(JSON.stringify(initialDepartments))
+                unitChecks: initialUnitChecks()
             };
         }
 
@@ -1633,9 +1118,17 @@ service cloud.firestore {
         // một bộ dữ liệu duy nhất, thay vì mỗi máy lưu localStorage riêng.
         // ============================================================
         const FIREBASE_CONFIG_KEY = 'hoabinh_firebase_config';
+        // >>> ĐIỀN 1 LẦN DUY NHẤT TẠI ĐÂY <<<
+        // Dán 6 thông số Firebase + mã truy cập vào đúng chỗ dưới đây rồi lưu file.
+        // Sau đó mọi máy mở file/trang web này sẽ TỰ ĐỘNG kết nối, không phải nhập lại.
         const DEFAULT_FIREBASE_CONFIG = {
-            apiKey: "", authDomain: "", projectId: "",
-            storageBucket: "", messagingSenderId: "", appId: "", accessCode: ""
+            apiKey: "AIzaSyBEc37el9LU4YxNe4490bAJgwZ3j4YxxqM",
+            authDomain: "duhb-920d4.firebaseapp.com",
+            projectId: "duhb-920d4",
+            storageBucket: "duhb-920d4.firebasestorage.app",
+            messagingSenderId: "88828520116",
+            appId: "1:88828520116:web:f2db51ae02c07abb9159e1",
+            accessCode: "HB-7kQ4m2Xp9"
         };
 
         let syncEnabled = false;
@@ -1652,7 +1145,8 @@ service cloud.firestore {
         }
 
         function isConfigValid(cfg) {
-            return !!(cfg.apiKey && cfg.projectId && cfg.appId && cfg.accessCode);
+            const ok = v => !!v && !String(v).startsWith('DÁN_');
+            return ok(cfg.apiKey) && ok(cfg.projectId) && ok(cfg.appId) && ok(cfg.accessCode);
         }
 
         function updateSyncStatusUI(mode, detail) {
@@ -2051,7 +1545,7 @@ service cloud.firestore {
 
         function loadSampleData() {
             if (!isAdminOnly()) return;
-            if (confirm("Bạn có muốn khôi phục danh mục 20 Nhiệm Vụ Trọng Điểm chuẩn từ Hồ sơ đăng ký? Thao tác này chỉ đặt lại danh sách nhiệm vụ, không ảnh hưởng các dữ liệu khác.")) {
+            if (confirm("Bạn có muốn khôi phục danh mục 42 Nhiệm Vụ Trọng Điểm chuẩn (Tháng 10, 11, 12/2026) từ Phụ lục đã nạp? Thao tác này chỉ đặt lại danh sách nhiệm vụ, không ảnh hưởng các dữ liệu khác.")) {
                 tasks = JSON.parse(JSON.stringify(initialTasks));
                 saveData();
             }
@@ -2063,6 +1557,7 @@ service cloud.firestore {
         // cho các thiết bị hoặc cán bộ khác để đồng bộ số liệu)
         // ============================================================
         function exportFullData() {
+            if (!isAdminOnly()) return;
             state.tasks = tasks;
             const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json;charset=utf-8;' });
             const link = document.createElement('a');
@@ -2242,9 +1737,11 @@ service cloud.firestore {
 
             filtered.forEach((t, index) => {
                 let badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
-                if(t.status === 'Hoàn thành') badgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
-                if(t.status === 'Nguy cơ chậm') badgeClass = 'bg-orange-100 text-orange-800 border-orange-300';
-                if(t.status === 'Quá hạn') badgeClass = 'bg-red-100 text-red-800 border-red-300';
+                let barColor = 'bg-amber-500';
+                if(t.status === 'Hoàn thành') { badgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300'; barColor = 'bg-emerald-500'; }
+                if(t.status === 'Nguy cơ chậm') { badgeClass = 'bg-orange-100 text-orange-800 border-orange-300'; barColor = 'bg-orange-500'; }
+                if(t.status === 'Quá hạn') { badgeClass = 'bg-red-100 text-red-800 border-red-300'; barColor = 'bg-red-600'; }
+                const progress = Math.max(0, Math.min(100, parseInt(t.progress) || 0));
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 transition">
@@ -2257,6 +1754,13 @@ service cloud.firestore {
                         <td class="p-3 font-medium text-slate-700">${t.assignee}</td>
                         <td class="p-3 text-slate-600">${t.category}</td>
                         <td class="p-3 font-mono text-slate-600">${t.dueDate}</td>
+                        <td class="p-3 text-slate-600">
+                            <div class="clamp-3" style="max-width:220px;" title="${(t.result || '').replace(/"/g, '&quot;')}">${t.result ? t.result : '<span class="italic text-slate-400">Chưa cập nhật</span>'}</div>
+                        </td>
+                        <td class="p-3 text-center">
+                            <div class="progress-track"><div class="progress-fill ${barColor}" style="width:${progress}%"></div></div>
+                            <div class="text-[10px] text-slate-600 mt-1 font-bold">${progress}%</div>
+                        </td>
                         <td class="p-3 text-center">
                             <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold border ${badgeClass}">
                                 ${t.status}
@@ -2317,48 +1821,12 @@ service cloud.firestore {
             });
         }
 
-        // Vẽ lại danh sách lựa chọn "Bộ phận xử lý" từ state.departments.
-        // selectedValue: đơn vị cần chọn sẵn (dùng khi sửa hồ sơ); nếu đơn vị đó
-        // chưa có trong danh mục chung (VD: nhập từ Excel) thì vẫn hiển thị đúng
-        // giá trị đó bằng một lựa chọn tạm, không tự ý sửa dữ liệu hồ sơ.
-        function renderDeptOptions(selectedValue) {
-            const sel = document.getElementById('friday-dept');
-            if (!sel) return;
-            let html = '<option value="">— Chọn đơn vị phụ trách —</option>';
-            state.departments.forEach(d => {
-                html += `<option value="${d}">${d}</option>`;
-            });
-            if (selectedValue && !state.departments.includes(selectedValue)) {
-                html += `<option value="${selectedValue}">${selectedValue} (chưa có trong danh mục)</option>`;
-            }
-            html += '<option value="__add_new__">➕ Thêm đơn vị mới...</option>';
-            sel.innerHTML = html;
-            sel.value = selectedValue || '';
-        }
-
-        // Xử lý khi người dùng chọn "➕ Thêm đơn vị mới..." trong dropdown
-        function handleDeptSelectChange(selectEl) {
-            if (selectEl.value !== '__add_new__') return;
-            const name = prompt('Nhập tên đơn vị/bộ phận xử lý mới:');
-            if (name && name.trim()) {
-                const trimmed = name.trim();
-                if (!state.departments.includes(trimmed)) {
-                    state.departments.push(trimmed);
-                    saveData(); // lưu bổ sung vào danh mục chung để lần sau mọi người cùng chọn được
-                }
-                renderDeptOptions(trimmed);
-            } else {
-                renderDeptOptions('');
-            }
-        }
-
         function openFridayModal() {
             if (!requirePermission('friday')) return;
             document.getElementById('friday-form').reset();
             document.getElementById('friday-id').value = '';
             document.getElementById('friday-modal-title').innerText = 'Thêm Hồ Sơ Thứ 6';
             document.getElementById('friday-code').value = `HS-F${String(state.friday.length + 1).padStart(2, '0')}`;
-            renderDeptOptions('');
             document.getElementById('friday-modal').classList.remove('hidden');
             lucide.createIcons();
         }
@@ -2370,7 +1838,7 @@ service cloud.firestore {
             document.getElementById('friday-id').value = f.id;
             document.getElementById('friday-code').value = f.code;
             document.getElementById('friday-content').value = f.content;
-            renderDeptOptions(f.dept);
+            document.getElementById('friday-dept').value = f.dept;
             document.getElementById('friday-received').value = f.received;
             document.getElementById('friday-deadline').value = f.deadline;
             document.getElementById('friday-status').value = f.status;
@@ -2379,183 +1847,18 @@ service cloud.firestore {
             lucide.createIcons();
         }
 
-        // ------------------------------------------------------------
-        // Nhập hồ sơ từ Excel/CSV xuất từ Hệ thống Một cửa điện tử
-        // (giải pháp cầu nối thủ công vì hệ thống của tỉnh không mở API công khai)
-        // ------------------------------------------------------------
-        let excelParsedRows = [];
-        let excelColumnMap = { code: '', content: '', dept: '', received: '', deadline: '', status: '' };
-
-        const EXCEL_FIELD_LABELS = {
-            code: 'Mã hồ sơ', content: 'Nội dung / Tên thủ tục', dept: 'Bộ phận xử lý',
-            received: 'Ngày/giờ nhận', deadline: 'Hạn trả', status: 'Trạng thái'
-        };
-        const EXCEL_FIELD_ALIASES = {
-            code: ['mahoso', 'sohoso', 'mahs', 'mabienhan', 'sobienhan'],
-            content: ['noidung', 'tenthutuc', 'trichyeu', 'tenhoso', 'thutuchanhchinh'],
-            dept: ['bophanxuly', 'donvixuly', 'phongbanxuly', 'nguoixuly', 'canboxuly'],
-            received: ['ngaynhan', 'thoigiannhan', 'ngaytiepnhan', 'gionhan'],
-            deadline: ['ngayhentra', 'hantra', 'thoihantra', 'ngaytra', 'hengiotra'],
-            status: ['trangthai', 'tinhtrang', 'ketqua']
-        };
-
-        function normalizeVNText(str) {
-            return (str || '').toString().toLowerCase()
-                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                .replace(/đ/g, 'd').replace(/[^a-z0-9]/g, '');
-        }
-
-        function openExcelImportModal() {
-            if (!requirePermission('friday')) return;
-            resetExcelImport();
-            document.getElementById('excel-import-modal').classList.remove('hidden');
-            lucide.createIcons();
-        }
-
-        function closeExcelImportModal() {
-            document.getElementById('excel-import-modal').classList.add('hidden');
-        }
-
-        function resetExcelImport() {
-            excelParsedRows = [];
-            document.getElementById('excel-file-input').value = '';
-            document.getElementById('excel-step-upload').classList.remove('hidden');
-            document.getElementById('excel-step-mapping').classList.add('hidden');
-        }
-
-        function handleExcelFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const rows = XLSX.utils.sheet_to_json(firstSheet, { defval: '' });
-                    if (!rows.length) {
-                        alert('Không tìm thấy dữ liệu trong file. Vui lòng kiểm tra lại file xuất từ hệ thống Một cửa.');
-                        return;
-                    }
-                    excelParsedRows = rows;
-                    autoDetectColumnMapping(Object.keys(rows[0]));
-                    renderExcelMappingUI(Object.keys(rows[0]));
-                    document.getElementById('excel-step-upload').classList.add('hidden');
-                    document.getElementById('excel-step-mapping').classList.remove('hidden');
-                    lucide.createIcons();
-                } catch (err) {
-                    console.error(err);
-                    alert('Không đọc được file. Vui lòng kiểm tra đúng định dạng .xlsx, .xls hoặc .csv.');
-                }
-            };
-            reader.readAsArrayBuffer(file);
-        }
-
-        function autoDetectColumnMapping(headers) {
-            Object.keys(excelColumnMap).forEach(field => {
-                const aliases = EXCEL_FIELD_ALIASES[field];
-                const match = headers.find(h => aliases.includes(normalizeVNText(h)));
-                excelColumnMap[field] = match || '';
-            });
-        }
-
-        function renderExcelMappingUI(headers) {
-            document.getElementById('excel-row-count').innerText = `${excelParsedRows.length} dòng dữ liệu`;
-            const fieldsBox = document.getElementById('excel-mapping-fields');
-            fieldsBox.innerHTML = Object.keys(EXCEL_FIELD_LABELS).map(field => {
-                const options = ['<option value="">— Không lấy —</option>'].concat(
-                    headers.map(h => `<option value="${h}" ${excelColumnMap[field] === h ? 'selected' : ''}>${h}</option>`)
-                ).join('');
-                return `
-                    <div>
-                        <label class="font-medium text-slate-600 block mb-1">${EXCEL_FIELD_LABELS[field]}${field === 'code' ? ' *' : ''}</label>
-                        <select onchange="updateExcelMapping('${field}', this.value)" class="w-full p-1.5 border border-slate-300 rounded text-xs">
-                            ${options}
-                        </select>
-                    </div>
-                `;
-            }).join('');
-            renderExcelPreview();
-        }
-
-        function updateExcelMapping(field, value) {
-            excelColumnMap[field] = value;
-            renderExcelPreview();
-        }
-
-        function renderExcelPreview() {
-            const head = document.getElementById('excel-preview-head');
-            const body = document.getElementById('excel-preview-body');
-            const fields = Object.keys(EXCEL_FIELD_LABELS);
-            head.innerHTML = '<tr>' + fields.map(f => `<th class="p-1.5">${EXCEL_FIELD_LABELS[f]}</th>`).join('') + '</tr>';
-            const previewRows = excelParsedRows.slice(0, 5);
-            body.innerHTML = previewRows.map(row => {
-                return '<tr>' + fields.map(f => `<td class="p-1.5">${excelColumnMap[f] ? (row[excelColumnMap[f]] ?? '') : '<span class="text-slate-300">—</span>'}</td>`).join('') + '</tr>';
-            }).join('');
-            const validCount = excelColumnMap.code ? excelParsedRows.filter(r => (r[excelColumnMap.code] || '').toString().trim() !== '').length : 0;
-            document.getElementById('excel-confirm-count').innerText = excelColumnMap.code ? `(${validCount} hồ sơ hợp lệ)` : '';
-        }
-
-        function confirmExcelImport() {
-            if (!requirePermission('friday')) return;
-            if (!excelColumnMap.code) {
-                alert('Vui lòng chọn cột "Mã hồ sơ" để hệ thống nhận diện từng hồ sơ.');
-                return;
-            }
-            let added = 0, updated = 0;
-            excelParsedRows.forEach(row => {
-                const code = (row[excelColumnMap.code] || '').toString().trim();
-                if (!code) return;
-                const record = {
-                    code: code,
-                    content: excelColumnMap.content ? (row[excelColumnMap.content] || '').toString() : '',
-                    dept: excelColumnMap.dept ? (row[excelColumnMap.dept] || '').toString() : '',
-                    received: excelColumnMap.received ? (row[excelColumnMap.received] || '').toString() : '',
-                    deadline: excelColumnMap.deadline ? (row[excelColumnMap.deadline] || '').toString() : '',
-                    status: excelColumnMap.status ? normalizeStatusValue((row[excelColumnMap.status] || '').toString()) : 'Đang Xử Lý'
-                };
-                if (record.dept && !state.departments.includes(record.dept)) {
-                    state.departments.push(record.dept); // bổ sung đơn vị mới gặp vào danh mục chung
-                }
-                const existingIdx = state.friday.findIndex(f => f.code === code);
-                if (existingIdx > -1) {
-                    state.friday[existingIdx] = Object.assign({}, state.friday[existingIdx], record);
-                    updated++;
-                } else {
-                    state.friday.push(Object.assign({ id: Date.now() + Math.floor(Math.random() * 1000) }, record));
-                    added++;
-                }
-            });
-            closeExcelImportModal();
-            saveData();
-            alert(`Đã nhập xong: ${added} hồ sơ mới, ${updated} hồ sơ được cập nhật.`);
-        }
-
-        function normalizeStatusValue(raw) {
-            const n = normalizeVNText(raw);
-            if (n.includes('hoanthanh') || n.includes('daxuly') || n.includes('dongy') || n.includes('traketqua')) return 'Đã Xử Lý';
-            if (n.includes('trehan') || n.includes('quahan')) return 'Trễ Hạn';
-            if (!raw) return 'Đang Xử Lý';
-            return 'Đang Xử Lý';
-        }
-
         function closeFridayModal() {
             document.getElementById('friday-modal').classList.add('hidden');
         }
 
         function saveFridayRecord(e) {
             e.preventDefault();
-            const deptValue = document.getElementById('friday-dept').value;
-            if (!deptValue || deptValue === '__add_new__') {
-                alert('Vui lòng chọn đơn vị/bộ phận phụ trách xử lý hồ sơ.');
-                return;
-            }
             const id = document.getElementById('friday-id').value;
             const record = {
                 id: id ? parseInt(id) : Date.now(),
                 code: document.getElementById('friday-code').value,
                 content: document.getElementById('friday-content').value,
-                dept: deptValue,
+                dept: document.getElementById('friday-dept').value,
                 received: document.getElementById('friday-received').value,
                 deadline: document.getElementById('friday-deadline').value,
                 status: document.getElementById('friday-status').value
@@ -2611,6 +1914,7 @@ service cloud.firestore {
         }
 
         function openMeetingListModal() {
+            if (!requirePermission('friday')) return;
             const body = document.getElementById('meeting-list-body');
             if (state.meetings.length === 0) {
                 body.innerHTML = `<p class="text-slate-500 italic text-center py-4">Chưa có ai đăng ký gặp Bí thư tuần này.</p>`;
@@ -2631,6 +1935,7 @@ service cloud.firestore {
         }
 
         function deleteMeetingRegistration(id) {
+            if (!requirePermission('friday')) return;
             state.meetings = state.meetings.filter(m => m.id !== id);
             saveData();
             openMeetingListModal();
@@ -2837,6 +2142,7 @@ service cloud.firestore {
             document.getElementById('modal-task-id').value = '';
             document.getElementById('modal-title').innerText = "Phiếu Giao Nhiệm Vụ Mới (Mô hình 3 Rõ)";
             document.getElementById('modal-code').value = `NV-${String(tasks.length + 1).padStart(2, '0')}`;
+            document.getElementById('modal-progress').value = 0;
             document.getElementById('task-modal').classList.remove('hidden');
         }
 
@@ -2856,6 +2162,8 @@ service cloud.firestore {
             document.getElementById('modal-partner').value = t.partner || '';
             document.getElementById('modal-duedate').value = t.dueDate;
             document.getElementById('modal-status').value = t.status;
+            document.getElementById('modal-progress').value = (t.progress !== undefined && t.progress !== null) ? t.progress : 0;
+            document.getElementById('modal-result').value = t.result || '';
             document.getElementById('modal-note').value = t.note || '';
 
             document.getElementById('modal-title').innerText = "Cập Nhật Nhiệm Vụ (3 Rõ - 3 Kiểm)";
@@ -2872,16 +2180,20 @@ service cloud.firestore {
             const partner = document.getElementById('modal-partner').value;
             const dueDate = document.getElementById('modal-duedate').value;
             const status = document.getElementById('modal-status').value;
+            let progress = parseInt(document.getElementById('modal-progress').value);
+            if (isNaN(progress)) progress = 0;
+            progress = Math.max(0, Math.min(100, progress));
+            const result = document.getElementById('modal-result').value;
             const note = document.getElementById('modal-note').value;
 
             if (id) {
                 const idx = tasks.findIndex(t => t.id === parseInt(id));
                 if (idx > -1) {
-                    tasks[idx] = { ...tasks[idx], code, category, title, assignee, partner, dueDate, status, note };
+                    tasks[idx] = { ...tasks[idx], code, category, title, assignee, partner, dueDate, status, progress, result, note };
                 }
             } else {
                 const newId = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
-                tasks.push({ id: newId, code, category, title, assignee, partner, dueDate, status, note });
+                tasks.push({ id: newId, code, category, title, assignee, partner, dueDate, status, progress, result, note });
             }
             closeTaskModal();
             saveData();
@@ -2914,17 +2226,18 @@ service cloud.firestore {
             document.getElementById('qr-modal').classList.add('hidden');
         }
 
-        // Export to CSV (danh sách 20 nhiệm vụ)
+        // Export to CSV (danh sách nhiệm vụ)
         function exportCSV() {
             let csv = '\uFEFF';
-            csv += "STT,Mã Nhiệm Vụ,Lĩnh Vực,Tên Nhiệm Vụ (Rõ Việc),Người Phụ Trách (Rõ Người),Đơn Vị Phối Hợp,Thời Hạn (Rõ Tiến Độ),Trạng Thái,Ghi Chú Minh Chứng\n";
+            csv += "STT,Mã Nhiệm Vụ,Tháng Thực Hiện,Tên Nhiệm Vụ (Rõ Việc),Người Phụ Trách (Rõ Người),Đơn Vị Phối Hợp,Thời Hạn (Rõ Tiến Độ),Kết Quả Đã Thực Hiện,% Tiến Độ,Trạng Thái,Ghi Chú Minh Chứng\n";
             tasks.forEach((t, i) => {
-                csv += `"${i+1}","${t.code}","${t.category}","${t.title}","${t.assignee}","${t.partner || ''}","${t.dueDate}","${t.status}","${t.note || ''}"\n`;
+                const progress = Math.max(0, Math.min(100, parseInt(t.progress) || 0));
+                csv += `"${i+1}","${t.code}","${t.category}","${t.title}","${t.assignee}","${t.partner || ''}","${t.dueDate}","${(t.result || '').replace(/"/g, '""')}","${progress}%","${t.status}","${(t.note || '').replace(/"/g, '""')}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `Danh_Sach_20_Nhiem_Vu_Dang_Uy_Hoa_Binh_${new Date().toISOString().slice(0,10)}.csv`;
+            link.download = `Danh_Sach_Nhiem_Vu_Dang_Uy_Hoa_Binh_${new Date().toISOString().slice(0,10)}.csv`;
             link.click();
         }
 
